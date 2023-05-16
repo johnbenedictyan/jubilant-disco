@@ -18,21 +18,21 @@ model User {
   image      String? /// Link to the user avatar.
   follows    User[]    @relation("UserFollows") /// List of other users that this one follows.
   followedBy User[]    @relation("UserFollows") /// List of other users that follows this one.
-  authored   Article[] @relation("Author") /// List of articles this user has written.
-  favorites  Article[] @relation("Favorites") /// List of articles this user has favorited.
+  authored   Review[] @relation("Author") /// List of reviews this user has written.
+  favorites  Review[] @relation("Favorites") /// List of reviews this user has favorited.
   comment    Comment[] @relation("Author") /// List of comments this user has written.
 }
 
-model Article {
+model Review {
   title          String    @unique
   slug           String    @id /// Slug is an uri safe string derived from the title.
-  description    String /// Description for SEO of this article.
-  body           String /// The main content of the article.
-  tagList        Tag[] /// List of tags associated with this article.
-  author         User      @relation("Author", fields: [authorUsername], references: [username], onDelete: Cascade) /// User that is the author of this article.
-  authorUsername String /// Username of the author of this article.
-  favoritedBy    User[]    @relation("Favorites") /// List of users that have favorited this article.
-  comments       Comment[] @relation("Comments") /// List of comments of this article.
+  description    String /// Description for SEO of this review.
+  body           String /// The main content of the review.
+  tagList        Tag[] /// List of tags associated with this review.
+  author         User      @relation("Author", fields: [authorUsername], references: [username], onDelete: Cascade) /// User that is the author of this review.
+  authorUsername String /// Username of the author of this review.
+  favoritedBy    User[]    @relation("Favorites") /// List of users that have favorited this review.
+  comments       Comment[] @relation("Comments") /// List of comments of this review.
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @default(now())
 }
@@ -44,11 +44,11 @@ model Comment {
   body           String /// The main content of the comment.
   author         User     @relation("Author", fields: [authorUsername], references: [username], onDelete: Cascade) /// User that is the author of this comment.
   authorUsername String /// Username of the author of this comment.
-  Article        Article  @relation("Comments", fields: [articleSlug], references: [slug], onDelete: Cascade) /// Article that this comment belongs to.
-  articleSlug    String /// Article slug that this comment belongs to.
+  Review        Review  @relation("Comments", fields: [reviewSlug], references: [slug], onDelete: Cascade) /// Review that this comment belongs to.
+  reviewSlug    String /// Review slug that this comment belongs to.
 }
 
 model Tag {
   tagName String    @id
-  article Article[] /// List of articles that have this tag.
+  review Review[] /// List of reviews that have this tag.
 }

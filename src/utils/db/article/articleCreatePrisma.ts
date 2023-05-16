@@ -8,13 +8,13 @@ interface RequiredFields {
   body: string;
 }
 
-export default async function articleCreatePrisma(
+export default async function reviewCreatePrisma(
   info: RequiredFields,
   tagList: Tag[],
   authorUsername: string
 ) {
   const slug = slugfy(info.title);
-  const article = await prisma.article.create({
+  const review = await prisma.review.create({
     data: {
       ...info,
       slug,
@@ -27,5 +27,5 @@ export default async function articleCreatePrisma(
       _count: { select: { favoritedBy: true } },
     },
   });
-  return article;
+  return review;
 }

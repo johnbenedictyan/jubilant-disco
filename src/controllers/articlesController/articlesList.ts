@@ -1,11 +1,11 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import { ParsedQs } from "qs";
-import articlesListPrisma from "../../utils/db/article/articleListPrisma";
+import reviewsListPrisma from "../../utils/db/review/reviewListPrisma";
 import userGetPrisma from "../../utils/db/user/userGetPrisma";
-import articleViewer from "../../view/articleViewer";
+import reviewViewer from "../../view/reviewViewer";
 
-function parseArticleListQuery(query: ParsedQs) {
+function parseReviewListQuery(query: ParsedQs) {
   let { tag, author, favorited } = query;
   const { limit, offset } = query;
   tag = tag ? (tag as string) : undefined;
@@ -17,18 +17,18 @@ function parseArticleListQuery(query: ParsedQs) {
 }
 
 /**
- * Article controller that must receive a request.
+ * Review controller that must receive a request.
  * @param req Request with an optional jwt token verified
  * @param res Response
  * @param next NextFunction
  * @returns void
  */
-export default async function articlesList(
+export default async function reviewsList(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const { tag, author, favorited, limit, offset } = parseArticleListQuery(
+  const { tag, author, favorited, limit, offset } = parseReviewListQuery(
     req.query
   );
   const username = req.auth?.user?.username;
@@ -37,8 +37,8 @@ export default async function articlesList(
     // Get current user
     const currentUser = await userGetPrisma(username);
 
-    // Get the articles
-    const articles = await articlesListPrisma(
+    // Get the reviews
+    const reviews = await reviewsListPrisma(
       tag,
       author,
       favorited,
@@ -46,14 +46,14 @@ export default async function articlesList(
       offset
     );
 
-    // Create articles view
-    const articlesListView = articles.map((article) =>
-      currentUser ? articleViewer(article, currentUser) : articleViewer(article)
+    // Create reviews view
+    const reviewsListView = reviews.map((review) =>
+      currentUser ? reviewViewer(review, currentUser) : reviewViewer(review)
     );
 
     return res.json({
-      articles: articlesListView,
-      articlesCount: articlesListView.length,
+      reviews: reviewsListView,
+      reviewsCount: reviewsListView.length,
     });
   } catch (error) {
     return next(error);

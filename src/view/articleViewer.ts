@@ -1,35 +1,35 @@
-import { Article, Tag, User } from "@prisma/client";
+import { Review, Tag, User } from "@prisma/client";
 import profileViewer from "./profileViewer";
 
-type FullArticle = Article & {
+type FullReview = Review & {
   tagList: Tag[];
   author: User & { followedBy: User[] };
   _count: { favoritedBy: number };
 };
 
-export default function articleViewer(
-  article: FullArticle,
-  currentUser?: User & { favorites: Article[] }
+export default function reviewViewer(
+  review: FullReview,
+  currentUser?: User & { favorites: Review[] }
 ) {
   const favorited = currentUser
-    ? currentUser.favorites.some((value) => value.slug === article.slug)
+    ? currentUser.favorites.some((value) => value.slug === review.slug)
     : false;
 
-  const tagListView = article.tagList.map((tag) => tag.tagName).sort();
+  const tagListView = review.tagList.map((tag) => tag.tagName).sort();
 
-  const authorView = profileViewer(article.author, currentUser);
+  const authorView = profileViewer(review.author, currentUser);
 
-  const articleView = {
-    slug: article.slug,
-    title: article.title,
-    description: article.description,
-    body: article.body,
+  const reviewView = {
+    slug: review.slug,
+    title: review.title,
+    description: review.description,
+    body: review.body,
     tagList: tagListView,
-    createdAt: article.createdAt,
-    updatedAt: article.updatedAt,
+    createdAt: review.createdAt,
+    updatedAt: review.updatedAt,
     favorited: favorited,
-    favoritesCount: article._count.favoritedBy,
+    favoritesCount: review._count.favoritedBy,
     author: authorView,
   };
-  return articleView;
+  return reviewView;
 }

@@ -1,18 +1,18 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
-import articleDeletePrisma from "../../utils/db/article/articleDeletePrisma";
+import reviewDeletePrisma from "../../utils/db/review/reviewDeletePrisma";
 import userGetPrisma from "../../utils/db/user/userGetPrisma";
-import articleViewer from "../../view/articleViewer";
+import reviewViewer from "../../view/reviewViewer";
 
 /**
- * Article controller that must receive a request with an authenticated user.
+ * Review controller that must receive a request with an authenticated user.
  * The parameters of the request must have a slug.
  * @param req Request with a jwt token verified
  * @param res Response
  * @param next NextFunction
  * @returns void
  */
-export default async function articlesDelete(
+export default async function reviewsDelete(
   req: Request,
   res: Response,
   next: NextFunction
@@ -25,12 +25,12 @@ export default async function articlesDelete(
     const currentUser = await userGetPrisma(userName);
     if (!currentUser) return res.sendStatus(401);
 
-    // Delete the article
-    const article = await articleDeletePrisma(slug);
+    // Delete the review
+    const review = await reviewDeletePrisma(slug);
 
-    // Create the deleted article view
-    const articleView = articleViewer(article, currentUser);
-    return res.status(200).json({ article: articleView });
+    // Create the deleted review view
+    const reviewView = reviewViewer(review, currentUser);
+    return res.status(200).json({ review: reviewView });
   } catch (error) {
     return next(error);
   }

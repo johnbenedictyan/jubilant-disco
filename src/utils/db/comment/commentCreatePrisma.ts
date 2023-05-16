@@ -7,7 +7,7 @@ export default async function commentCreatePrisma(
   author: User
 ) {
   const comment = await prisma.comment.create({
-    data: { body: content, authorUsername: author.username, articleSlug: slug },
+    data: { body: content, authorUsername: author.username, reviewSlug: slug },
     include: { author: { include: { followedBy: true } } },
   });
   return comment;

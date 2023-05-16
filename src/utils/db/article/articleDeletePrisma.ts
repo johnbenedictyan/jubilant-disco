@@ -1,7 +1,7 @@
 import prisma from "../prisma";
 
-export default async function articleDeletePrisma(slug: string) {
-  const article = await prisma.article.delete({
+export default async function reviewDeletePrisma(slug: string) {
+  const review = await prisma.review.delete({
     where: { slug },
     include: {
       author: { include: { followedBy: true } },
@@ -9,5 +9,5 @@ export default async function articleDeletePrisma(slug: string) {
       _count: { select: { favoritedBy: true } },
     },
   });
-  return article;
+  return review;
 }

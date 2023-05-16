@@ -1,7 +1,7 @@
 import prisma from "../prisma";
 
-export default async function articleGetPrisma(slug: string) {
-  const article = await prisma.article.findUnique({
+export default async function reviewGetPrisma(slug: string) {
+  const review = await prisma.review.findUnique({
     where: { slug },
     include: {
       author: { include: { followedBy: true } },
@@ -9,5 +9,5 @@ export default async function articleGetPrisma(slug: string) {
       _count: { select: { favoritedBy: true } },
     },
   });
-  return article;
+  return review;
 }

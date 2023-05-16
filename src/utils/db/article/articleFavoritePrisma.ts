@@ -1,11 +1,11 @@
 import { User } from "@prisma/client";
 import prisma from "../prisma";
 
-export default async function articleFavoritePrisma(
+export default async function reviewFavoritePrisma(
   currentUser: User,
   slug: string
 ) {
-  const article = await prisma.article.update({
+  const review = await prisma.review.update({
     where: { slug },
     data: { favoritedBy: { connect: { username: currentUser.username } } },
     include: {
@@ -16,5 +16,5 @@ export default async function articleFavoritePrisma(
       _count: { select: { favoritedBy: true } },
     },
   });
-  return article;
+  return review;
 }

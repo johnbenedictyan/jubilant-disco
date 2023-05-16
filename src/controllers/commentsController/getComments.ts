@@ -6,7 +6,7 @@ import commentViewer from "../../view/commentViewer";
 
 /**
  * Comment controller that must receive a request with an optionally authenticated user.
- * The parameters of the request must have a slug to the article the comment belongs to.
+ * The parameters of the request must have a slug to the review the comment belongs to.
  * @param req Request with an optionally jwt token verified
  * @param res Response
  * @param next NextFunction

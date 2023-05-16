@@ -7,12 +7,12 @@ interface UpdateFields {
   body?: string;
 }
 
-export default async function articleUpdatePrisma(
+export default async function reviewUpdatePrisma(
   slug: string,
   info: UpdateFields
 ) {
   const newSlug = slugfy(slug);
-  const article = await prisma.article.update({
+  const review = await prisma.review.update({
     where: { slug },
     data: {
       ...info,
@@ -25,5 +25,5 @@ export default async function articleUpdatePrisma(
       _count: { select: { favoritedBy: true } },
     },
   });
-  return article;
+  return review;
 }

@@ -3,13 +3,13 @@ import { Request } from "express-jwt";
 import { ValidationError } from "../../utils/types";
 
 /**
- * Middleware to validate request for article feed controller.
+ * Middleware to validate request for review feed controller.
  * @param req Request
  * @param res Response
  * @param next NextFunction
  * @returns
  */
-export default async function articlesFeedValidator(
+export default async function reviewsFeedValidator(
   req: Request,
   res: Response,
   next: NextFunction

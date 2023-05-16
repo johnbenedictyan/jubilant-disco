@@ -1,9 +1,9 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import { ParsedQs } from "qs";
-import articleFeedPrisma from "../../utils/db/article/articleFeedPrisma";
+import reviewFeedPrisma from "../../utils/db/review/reviewFeedPrisma";
 import userGetPrisma from "../../utils/db/user/userGetPrisma";
-import articleViewer from "../../view/articleViewer";
+import reviewViewer from "../../view/reviewViewer";
 
 function parseQuery(query: ParsedQs) {
   const { limit, offset } = query;
@@ -13,13 +13,13 @@ function parseQuery(query: ParsedQs) {
 }
 
 /**
- * Article controller that must receive a request with an authenticated user.
+ * Review controller that must receive a request with an authenticated user.
  * @param req Request with a jwt token verified
  * @param res Response
  * @param next NextFunction
  * @returns void
  */
-export default async function articlesFeed(
+export default async function reviewsFeed(
   req: Request,
   res: Response,
   next: NextFunction
@@ -32,17 +32,17 @@ export default async function articlesFeed(
     const currentUser = await userGetPrisma(username);
     if (!currentUser) return res.sendStatus(401);
 
-    // Get articles feed
-    const articles = await articleFeedPrisma(currentUser, limit, offset);
+    // Get reviews feed
+    const reviews = await reviewFeedPrisma(currentUser, limit, offset);
 
-    // Create articles feed view
-    const articlesFeedView = articles.map((article) =>
-      currentUser ? articleViewer(article, currentUser) : articleViewer(article)
+    // Create reviews feed view
+    const reviewsFeedView = reviews.map((review) =>
+      currentUser ? reviewViewer(review, currentUser) : reviewViewer(review)
     );
 
     return res.json({
-      articles: articlesFeedView,
-      articlesCount: articlesFeedView.length,
+      reviews: reviewsFeedView,
+      reviewsCount: reviewsFeedView.length,
     });
   } catch (error) {
     return next(error);

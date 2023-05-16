@@ -3,13 +3,13 @@ import { Request } from "express-jwt";
 import { ValidationError } from "../../utils/types";
 
 /**
- * Middleware to validate request properties for articles update controller.
+ * Middleware to validate request properties for reviews update controller.
  * @param req Request
  * @param res Response
  * @param next NextFunction
  * @returns
  */
-export default async function articlesUpdateValidator(
+export default async function reviewsUpdateValidator(
   req: Request,
   res: Response,
   next: NextFunction
@@ -21,12 +21,12 @@ export default async function articlesUpdateValidator(
     return res.status(400).json({ errors });
   }
 
-  if (!req.body.article && typeof req.body.article != "object") {
-    errors.body.push("article must be an object inside body");
+  if (!req.body.review && typeof req.body.review != "object") {
+    errors.body.push("review must be an object inside body");
     return res.status(400).json({ errors });
   }
 
-  const { title, description, body } = req.body.article;
+  const { title, description, body } = req.body.review;
 
   if (title && typeof title != "string")
     errors.body.push("title must be a string");

@@ -1,12 +1,12 @@
 import { User } from "@prisma/client";
 import prisma from "../prisma";
 
-export default async function articleFeedPrisma(
+export default async function reviewFeedPrisma(
   currentUser: User & { follows: User[] },
   limit = 20,
   offset = 0
 ) {
-  const articles = await prisma.article.findMany({
+  const reviews = await prisma.review.findMany({
     include: {
       tagList: true,
       author: {
@@ -17,5 +17,5 @@ export default async function articleFeedPrisma(
     take: limit,
     skip: offset,
   });
-  return articles;
+  return reviews;
 }

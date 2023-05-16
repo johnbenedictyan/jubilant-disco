@@ -2,7 +2,7 @@ import express from "express";
 import usersRouter from "./routes/api/users";
 import userRouter from "./routes/api/user";
 import profilesRouter from "./routes/api/profiles";
-import articlesRouter from "./routes/api/articles";
+import reviewsRouter from "./routes/api/reviews";
 import tagsRouter from "./routes/api/tags";
 import generalErrorHandler from "./middleware/errorHandling/generalErrorHandler";
 import {
@@ -21,7 +21,7 @@ app.use("/api/user", userRouter);
 
 app.use("/api/profiles", profilesRouter);
 
-app.use("/api/articles", articlesRouter);
+app.use("/api/reviews", reviewsRouter);
 
 app.use("/api/tags", tagsRouter);
 

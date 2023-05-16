@@ -3,13 +3,13 @@ import { Request } from "express-jwt";
 import { ValidationError } from "../../utils/types";
 
 /**
- * Middleware to validate input for article creation controller.
+ * Middleware to validate input for review creation controller.
  * @param req Request
  * @param res Response
  * @param next NextFunction
  * @returns void
  */
-export default async function articlesCreateValidator(
+export default async function reviewsCreateValidator(
   req: Request,
   res: Response,
   next: NextFunction
@@ -22,12 +22,12 @@ export default async function articlesCreateValidator(
     return res.status(400).json({ errors });
   }
 
-  if (!req.body.article && typeof req.body.article != "object") {
-    errors.body.push("article must be an object inside body");
+  if (!req.body.review && typeof req.body.review != "object") {
+    errors.body.push("review must be an object inside body");
     return res.status(400).json({ errors });
   }
 
-  const { title, description, body, tagList } = req.body.article;
+  const { title, description, body, tagList } = req.body.review;
 
   // Checks if title description and body are present and non-empty strings.
   const requiredChecks = { title, description, body };

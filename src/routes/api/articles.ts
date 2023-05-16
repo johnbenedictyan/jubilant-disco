@@ -1,7 +1,7 @@
 import { Router } from "express";
-import * as articles from "../../controllers/articlesController";
+import * as reviews from "../../controllers/reviewsController";
 import * as comments from "../../controllers/commentsController";
-import * as validator from "../../middleware/articlesValidator";
+import * as validator from "../../middleware/reviewsValidator";
 import commentCreateValidator from "../../middleware/commentsValidator/commentCreateValidator";
 import * as auth from "../../middleware/auth/authenticator";
 
@@ -10,34 +10,34 @@ const router = Router();
 router.get(
   "/",
   auth.optionalAuthenticate,
-  validator.articlesListValidator,
-  articles.articlesList
+  validator.reviewsListValidator,
+  reviews.reviewsList
 );
 
 router.get(
   "/feed",
   auth.authenticate,
-  validator.articlesFeedValidator,
-  articles.articlesFeed
+  validator.reviewsFeedValidator,
+  reviews.reviewsFeed
 );
 
-router.get("/:slug", auth.optionalAuthenticate, articles.articlesGet);
+router.get("/:slug", auth.optionalAuthenticate, reviews.reviewsGet);
 
 router.post(
   "/",
   auth.authenticate,
-  validator.articlesCreateValidator,
-  articles.articlesCreate
+  validator.reviewsCreateValidator,
+  reviews.reviewsCreate
 );
 
 router.put(
   "/:slug",
   auth.authenticate,
-  validator.articlesUpdateValidator,
-  articles.articlesUpdate
+  validator.reviewsUpdateValidator,
+  reviews.reviewsUpdate
 );
 
-router.delete("/:slug", auth.authenticate, articles.articlesDelete);
+router.delete("/:slug", auth.authenticate, reviews.reviewsDelete);
 
 router.post(
   "/:slug/comments",
@@ -54,12 +54,12 @@ router.delete(
   comments.deleteComment
 );
 
-router.post("/:slug/favorite", auth.authenticate, articles.articlesFavorite);
+router.post("/:slug/favorite", auth.authenticate, reviews.reviewsFavorite);
 
 router.delete(
   "/:slug/favorite",
   auth.authenticate,
-  articles.articlesUnFavorite
+  reviews.reviewsUnFavorite
 );
 
 export default router;

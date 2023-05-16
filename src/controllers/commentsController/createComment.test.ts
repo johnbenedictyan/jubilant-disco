@@ -38,7 +38,7 @@ const mockUser = {
 };
 
 const mockComment = {
-  articleSlug: "test-slug",
+  reviewSlug: "test-slug",
   authorUsername: "test-user-username",
   body: "test-comment-body",
   createdAt: new Date(),

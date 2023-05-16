@@ -1,12 +1,12 @@
 import { Tag } from "@prisma/client";
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
-import articleCreatePrisma from "../../utils/db/article/articleCreatePrisma";
+import reviewCreatePrisma from "../../utils/db/review/reviewCreatePrisma";
 import tagsCreatePrisma from "../../utils/db/tag/tagsCreatePrisma";
 import userGetPrisma from "../../utils/db/user/userGetPrisma";
-import articleViewer from "../../view/articleViewer";
+import reviewViewer from "../../view/reviewViewer";
 
-interface Article {
+interface Review {
   title: string;
   description: string;
   body: string;
@@ -14,19 +14,19 @@ interface Article {
 }
 
 /**
- * Article controller that must receive a request with an authenticated user.
- * The body of the request must have the article object that is an @interface Article.
+ * Review controller that must receive a request with an authenticated user.
+ * The body of the request must have the review object that is an @interface Review.
  * @param req Request with a jwt token verified
  * @param res Response
  * @param next NextFunction
  * @returns void
  */
-export default async function articlesCreate(
+export default async function reviewsCreate(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const { title, description, body, tagList }: Article = req.body.article;
+  const { title, description, body, tagList }: Review = req.body.review;
   const userName = req.auth?.user?.username;
 
   try {
@@ -40,16 +40,16 @@ export default async function articlesCreate(
       tags = await tagsCreatePrisma(tagList);
     }
 
-    // Create the article
-    const article = await articleCreatePrisma(
+    // Create the review
+    const review = await reviewCreatePrisma(
       { title, description, body },
       tags,
       currentUser.username
     );
 
-    // Create article view
-    const articleView = articleViewer(article, currentUser);
-    return res.status(201).json({ article: articleView });
+    // Create review view
+    const reviewView = reviewViewer(review, currentUser);
+    return res.status(201).json({ review: reviewView });
   } catch (error) {
     return next(error);
   }

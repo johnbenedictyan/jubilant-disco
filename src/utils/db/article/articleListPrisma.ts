@@ -1,13 +1,13 @@
 import prisma from "../prisma";
 
-export default async function articlesListPrisma(
+export default async function reviewsListPrisma(
   tag?: string,
   authorUsername?: string,
   favorited?: string,
   limit = 20,
   offset = 0
 ) {
-  const articles = await prisma.article.findMany({
+  const reviews = await prisma.review.findMany({
     where: {
       authorUsername,
       tagList: tag ? { some: { tagName: tag } } : undefined,
@@ -22,5 +22,5 @@ export default async function articlesListPrisma(
       _count: { select: { favoritedBy: true } },
     },
   });
-  return articles;
+  return reviews;
 }
