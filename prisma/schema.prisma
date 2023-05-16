@@ -2,53 +2,74 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL") /// Format in env file: postgresql://USER:PASSWORD@HOST:PORT/DATABASE
+    provider = "postgresql"
+    url      = env("DATABASE_URL") /// Format in env file: postgresql://USER:PASSWORD@HOST:PORT/DATABASE
 }
 
 model User {
-  email      String    @unique /// User email for registering and login use.
-  username   String    @id /// User internal id.
-  password   String /// User password stored in the database.
-  bio        String? /// User biographical information.
-  image      String? /// Link to the user avatar.
-  follows    User[]    @relation("UserFollows") /// List of other users that this one follows.
-  followedBy User[]    @relation("UserFollows") /// List of other users that follows this one.
-  authored   Review[] @relation("Author") /// List of reviews this user has written.
-  favorites  Review[] @relation("Favorites") /// List of reviews this user has favorited.
-  comment    Comment[] @relation("Author") /// List of comments this user has written.
+    email      String    @unique /// User email for registering and login use.
+    username   String    @id /// User internal id.
+    password   String /// User password stored in the database.
+    bio        String? /// User biographical information.
+    image      String? /// Link to the user avatar.
+    follows    User[]    @relation("UserFollows") /// List of other users that this one follows.
+    followedBy User[]    @relation("UserFollows") /// List of other users that follows this one.
+    authored   Review[]  @relation("Author") /// List of reviews this user has written.
+    favorites  Review[]  @relation("Favorites") /// List of reviews this user has favorited.
+    comment    Comment[] @relation("Author") /// List of comments this user has written.
 }
 
 model Review {
-  title          String    @unique
-  slug           String    @id /// Slug is an uri safe string derived from the title.
-  description    String /// Description for SEO of this review.
-  body           String /// The main content of the review.
-  tagList        Tag[] /// List of tags associated with this review.
-  author         User      @relation("Author", fields: [authorUsername], references: [username], onDelete: Cascade) /// User that is the author of this review.
-  authorUsername String /// Username of the author of this review.
-  favoritedBy    User[]    @relation("Favorites") /// List of users that have favorited this review.
-  comments       Comment[] @relation("Comments") /// List of comments of this review.
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @default(now())
+    title          String    @unique
+    slug           String    @id /// Slug is an uri safe string derived from the title.
+    description    String /// Description for SEO of this review.
+    body           String /// The main content of the review.
+    tagList        Tag[] /// List of tags associated with this review.
+    author         User      @relation("Author", fields: [authorUsername], references: [username], onDelete: Cascade) /// User that is the author of this review.
+    authorUsername String /// Username of the author of this review.
+    favoritedBy    User[]    @relation("Favorites") /// List of users that have favorited this review.
+    comments       Comment[] @relation("Comments") /// List of comments of this review.
+    createdAt      DateTime  @default(now())
+    updatedAt      DateTime  @default(now())
 }
 
 model Comment {
-  id             Int      @id @default(autoincrement())
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @default(now())
-  body           String /// The main content of the comment.
-  author         User     @relation("Author", fields: [authorUsername], references: [username], onDelete: Cascade) /// User that is the author of this comment.
-  authorUsername String /// Username of the author of this comment.
-  Review        Review  @relation("Comments", fields: [reviewSlug], references: [slug], onDelete: Cascade) /// Review that this comment belongs to.
-  reviewSlug    String /// Review slug that this comment belongs to.
+    id             Int      @id @default(autoincrement())
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @default(now())
+    body           String /// The main content of the comment.
+    author         User     @relation("Author", fields: [authorUsername], references: [username], onDelete: Cascade) /// User that is the author of this comment.
+    authorUsername String /// Username of the author of this comment.
+    review         Review   @relation("Comments", fields: [reviewSlug], references: [slug], onDelete: Cascade) /// Review that this comment belongs to.
+    reviewSlug     String /// Review slug that this comment belongs to.
 }
 
 model Tag {
-  tagName String    @id
-  review Review[] /// List of reviews that have this tag.
+    tagName String   @id
+    review  Review[] /// List of reviews that have this tag.
+    shop    Shop[] // List of shops that have this tag.
+}
+
+model Shop {
+    id            Int     @id @default(autoincrement())
+    name          String // The string of the shop
+    addressField1 String
+    addressField2 String
+    addressField3 String
+    postalCode    Int
+    rating        Int     @default(0)
+    tagList       Tag[] // Tags associated with this shop
+    queueList     Queue[]
+}
+
+model Queue {
+    name   String
+    Shop   Shop   @relation(fields: [shopId], references: [id])
+    shopId Int
+
+    @@id([name, shopId])
 }
