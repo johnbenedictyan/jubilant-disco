@@ -20,7 +20,6 @@ model User {
     followedBy    User[]    @relation("UserFollows") /// List of other users that follows this one.
     authored      Review[]  @relation("Author") /// List of reviews this user has written.
     favorites     Review[]  @relation("Favorites") /// List of reviews this user has favorited.
-    comment       Comment[] @relation("Author") /// List of comments this user has written.
     favoriteShops Shop[]    @relation("FavoriteShops") // List of shops this user hs favorited.
 }
 
@@ -33,20 +32,8 @@ model Review {
     author         User      @relation("Author", fields: [authorUsername], references: [username], onDelete: Cascade) /// User that is the author of this review.
     authorUsername String /// Username of the author of this review.
     favoritedBy    User[]    @relation("Favorites") /// List of users that have favorited this review.
-    comments       Comment[] @relation("Comments") /// List of comments of this review.
     createdAt      DateTime  @default(now())
     updatedAt      DateTime  @default(now())
-}
-
-model Comment {
-    id             Int      @id @default(autoincrement())
-    createdAt      DateTime @default(now())
-    updatedAt      DateTime @default(now())
-    body           String /// The main content of the comment.
-    author         User     @relation("Author", fields: [authorUsername], references: [username], onDelete: Cascade) /// User that is the author of this comment.
-    authorUsername String /// Username of the author of this comment.
-    review         Review   @relation("Comments", fields: [reviewSlug], references: [slug], onDelete: Cascade) /// Review that this comment belongs to.
-    reviewSlug     String /// Review slug that this comment belongs to.
 }
 
 model Tag {

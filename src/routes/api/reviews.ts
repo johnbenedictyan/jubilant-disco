@@ -1,8 +1,6 @@
 import { Router } from "express";
 import * as reviews from "../../controllers/reviewsController";
-import * as comments from "../../controllers/commentsController";
 import * as validator from "../../middleware/reviewsValidator";
-import commentCreateValidator from "../../middleware/commentsValidator/commentCreateValidator";
 import * as auth from "../../middleware/auth/authenticator";
 
 const router = Router();
@@ -38,21 +36,6 @@ router.put(
 );
 
 router.delete("/:slug", auth.authenticate, reviews.reviewsDelete);
-
-router.post(
-  "/:slug/comments",
-  auth.authenticate,
-  commentCreateValidator,
-  comments.createComment
-);
-
-router.get("/:slug/comments", auth.optionalAuthenticate, comments.getComments);
-
-router.delete(
-  "/:slug/comments/:id([0-9]+)",
-  auth.authenticate,
-  comments.deleteComment
-);
 
 router.post("/:slug/favorite", auth.authenticate, reviews.reviewsFavorite);
 
