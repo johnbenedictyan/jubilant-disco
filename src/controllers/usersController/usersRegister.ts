@@ -16,13 +16,13 @@ export default async function usersRegister(
   res: Response,
   next: NextFunction
 ) {
-  const { email, password, username } = req.body.user;
+  const { email, password, username, role } = req.body.user;
   try {
     // Hash password
     const hashed = hashPassword(password);
 
     // Create the new user on the database
-    const user = await userCreatePrisma(username, email, hashed);
+    const user = await userCreatePrisma(username, email, hashed, role);
 
     // Create the authentication token for future use
     const token = createUserToken(user);

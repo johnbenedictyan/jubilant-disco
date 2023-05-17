@@ -21,7 +21,7 @@ model User {
     authored      Review[] @relation("Author") /// List of reviews this user has written.
     likes         Review[] @relation("Likes") /// List of reviews this user has liked.
     favoriteShops Shop[]   @relation("FavoriteShops") // List of shops this user hs favorited.
-    role          String
+    role          String   @default("user")
 }
 
 model Review {
