@@ -1,6 +1,6 @@
-import * as dotenv from "dotenv";
-import { Request } from "express";
-import { expressjwt as jwt } from "express-jwt";
+import * as dotenv from 'dotenv';
+import { NextFunction, Request, Response } from 'express';
+import { expressjwt as jwt, Request as JWTRequest } from 'express-jwt';
 
 dotenv.config();
 
@@ -36,3 +36,14 @@ export const optionalAuthenticate = jwt({
   credentialsRequired: false,
   getToken: getTokenInHeader,
 });
+
+// Admin Authenticate is a middleware that will not throw errors, only if user is an admin.
+export const adminAuthenticate = [
+  authenticate,
+  (req: JWTRequest, res: Response, next: NextFunction) => {
+    if (req.auth?.user.role && req.auth?.user.role != "admin") {
+      return res.sendStatus(401);
+    }
+    next();
+  },
+];
