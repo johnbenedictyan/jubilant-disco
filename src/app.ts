@@ -1,14 +1,13 @@
-import express from "express";
-import usersRouter from "./routes/api/users";
-import userRouter from "./routes/api/user";
-import profilesRouter from "./routes/api/profiles";
-import reviewsRouter from "./routes/api/reviews";
-import tagsRouter from "./routes/api/tags";
-import generalErrorHandler from "./middleware/errorHandling/generalErrorHandler";
-import {
-  authErrorHandler,
-  prismaErrorHandler,
-} from "./middleware/errorHandling";
+import express from 'express';
+
+import { authErrorHandler, prismaErrorHandler } from './middleware/errorHandling';
+import generalErrorHandler from './middleware/errorHandling/generalErrorHandler';
+import profilesRouter from './routes/api/profiles';
+import reviewsRouter from './routes/api/reviews';
+import shopsRouter from './routes/api/shops';
+import tagsRouter from './routes/api/tags';
+import userRouter from './routes/api/user';
+import usersRouter from './routes/api/users';
 
 const app = express();
 
@@ -22,6 +21,8 @@ app.use("/api/user", userRouter);
 app.use("/api/profiles", profilesRouter);
 
 app.use("/api/reviews", reviewsRouter);
+
+app.use("/api/shops", shopsRouter);
 
 app.use("/api/tags", tagsRouter);
 
