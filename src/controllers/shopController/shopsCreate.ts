@@ -1,11 +1,11 @@
-import { Tag } from "@prisma/client";
-import { NextFunction, Response } from "express";
-import { Request } from "express-jwt";
+import { Tag } from '@prisma/client';
+import { NextFunction, Response } from 'express';
+import { Request } from 'express-jwt';
 
-import shopCreatePrisma from "../../utils/db/shop/shopCreatePrisma";
-import tagsCreatePrisma from "../../utils/db/tag/tagsCreatePrisma";
-import userGetPrisma from "../../utils/db/user/userGetPrisma";
-import shopViewer from "../../view/shopViewer";
+import shopCreatePrisma from '../../utils/db/shop/shopCreatePrisma';
+import tagsCreatePrisma from '../../utils/db/tag/tagsCreatePrisma';
+import userGetPrisma from '../../utils/db/user/userGetPrisma';
+import shopViewer from '../../view/shopViewer';
 
 interface Shop {
   name: string;
@@ -52,7 +52,13 @@ export default async function shopsCreate(
 
     // Create the shop
     const shop = await shopCreatePrisma(
-      { name, addressField1, addressField2, addressField3, postalCode },
+      {
+        name,
+        addressField1,
+        addressField2,
+        addressField3,
+        postalCode,
+      },
       tags
     );
 

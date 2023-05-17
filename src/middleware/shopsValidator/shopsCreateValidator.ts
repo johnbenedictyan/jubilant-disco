@@ -1,5 +1,6 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
+
 import { ValidationError } from "../../utils/types";
 
 /**
@@ -37,16 +38,24 @@ export default async function shopsCreateValidator(
   } = req.body.shop;
 
   // Checks if title description and body are present and non-empty strings.
-  const requiredChecks = {
+  const requiredStringChecks = {
     name,
     addressField1,
     addressField2,
     addressField3,
-    postalCode,
   };
-  for (const [variable, content] of Object.entries(requiredChecks)) {
+  for (const [variable, content] of Object.entries(requiredStringChecks)) {
     if (typeof content != "string" || content.length == 0) {
       errors.body.push(`${variable} field must be a non-empty string`);
+    }
+  }
+
+  const requiredNumberChecks = {
+    postalCode,
+  };
+  for (const [variable, content] of Object.entries(requiredNumberChecks)) {
+    if (typeof content != "number") {
+      errors.body.push(`${variable} field must be a valid number`);
     }
   }
 
