@@ -9,6 +9,7 @@ export default async function userGetPrisma(username: string) {
       followedBy: true,
       authored: true,
       favorites: true,
+      favoriteShops: true,
     },
   });
   return user;

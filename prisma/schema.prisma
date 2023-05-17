@@ -11,16 +11,17 @@ datasource db {
 }
 
 model User {
-    email      String    @unique /// User email for registering and login use.
-    username   String    @id /// User internal id.
-    password   String /// User password stored in the database.
-    bio        String? /// User biographical information.
-    image      String? /// Link to the user avatar.
-    follows    User[]    @relation("UserFollows") /// List of other users that this one follows.
-    followedBy User[]    @relation("UserFollows") /// List of other users that follows this one.
-    authored   Review[]  @relation("Author") /// List of reviews this user has written.
-    favorites  Review[]  @relation("Favorites") /// List of reviews this user has favorited.
-    comment    Comment[] @relation("Author") /// List of comments this user has written.
+    email         String    @unique /// User email for registering and login use.
+    username      String    @id /// User internal id.
+    password      String /// User password stored in the database.
+    bio           String? /// User biographical information.
+    image         String? /// Link to the user avatar.
+    follows       User[]    @relation("UserFollows") /// List of other users that this one follows.
+    followedBy    User[]    @relation("UserFollows") /// List of other users that follows this one.
+    authored      Review[]  @relation("Author") /// List of reviews this user has written.
+    favorites     Review[]  @relation("Favorites") /// List of reviews this user has favorited.
+    comment       Comment[] @relation("Author") /// List of comments this user has written.
+    favoriteShops Shop[]    @relation("FavoriteShops") // List of shops this user hs favorited.
 }
 
 model Review {
@@ -64,6 +65,7 @@ model Shop {
     rating        Int     @default(0)
     tagList       Tag[] // Tags associated with this shop
     queueList     Queue[]
+    favoritedBy   User[]  @relation("FavoriteShops")
 }
 
 model Queue {

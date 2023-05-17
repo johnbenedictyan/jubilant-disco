@@ -1,7 +1,6 @@
-import prisma from "../prisma";
+import prisma from '../prisma';
 
 interface UpdateFields {
-  id?: number;
   name?: string;
   addressField1?: string;
   addressField2?: string;
@@ -10,7 +9,16 @@ interface UpdateFields {
 }
 
 export default async function shopUpdatePrisma(id: number, info: UpdateFields) {
-  if (!id) return null;
-  const shop = await prisma.shop.update({ where: { id }, data: info });
+  const shop = await prisma.shop.update({
+    where: { id },
+    data: {
+      ...info,
+    },
+    include: {
+      queueList: true,
+      tagList: true,
+      _count: { select: { favoritedBy: true } },
+    },
+  });
   return shop;
 }

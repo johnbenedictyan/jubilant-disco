@@ -1,11 +1,9 @@
 import prisma from '../prisma';
 
-export default async function shopGetPrisma(id: number) {
-  if (!id) return null;
-  const shop = await prisma.shop.findUnique({
+export default async function shopDeletePrisma(id: number) {
+  const shop = await prisma.shop.delete({
     where: { id },
     include: {
-      queueList: true,
       tagList: true,
       _count: { select: { favoritedBy: true } },
     },

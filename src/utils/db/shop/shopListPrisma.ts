@@ -6,6 +6,8 @@ export default async function shopsListPrisma(
   addressField2?: string,
   addressField3?: string,
   postalCode?: number,
+  tag?: string,
+  favorited?: string,
   limit = 20,
   offset = 0
 ) {
@@ -16,13 +18,16 @@ export default async function shopsListPrisma(
       addressField2,
       addressField3,
       postalCode,
+      tagList: tag ? { some: { tagName: tag } } : undefined,
+      favoritedBy: favorited ? { some: { username: favorited } } : undefined,
     },
     take: limit,
     skip: offset,
     orderBy: { rating: "desc" },
     include: {
       queueList: true,
-      _count: { select: { queueList: true } },
+      tagList: true,
+      _count: { select: { favoritedBy: true } },
     },
   });
   return shops;
