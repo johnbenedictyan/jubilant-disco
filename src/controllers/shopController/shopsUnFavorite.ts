@@ -1,9 +1,10 @@
-import { NextFunction, Response } from 'express';
-import { Request } from 'express-jwt';
+import { NextFunction, Response } from "express";
+import { Request } from "express-jwt";
 
-import shopUnFavoritePrisma from '../../utils/db/shop/shopUnFavoritePrisma';
-import userGetPrisma from '../../utils/db/user/userGetPrisma';
-import shopViewer from '../../view/shopViewer';
+import shopGetPrisma from "../../utils/db/shop/shopGetPrisma";
+import shopUnFavoritePrisma from "../../utils/db/shop/shopUnFavoritePrisma";
+import userGetPrisma from "../../utils/db/user/userGetPrisma";
+import shopViewer from "../../view/shopViewer";
 
 /**
  * Shop controller that must receive a request with an authenticated user.
@@ -26,9 +27,12 @@ export default async function shopsUnFavorite(
     let currentUser = await userGetPrisma(username);
     if (!currentUser) return res.sendStatus(401);
 
-    // UnFavorite the shop
-    const shop = await shopUnFavoritePrisma(currentUser, id);
+    // Get the shop
+    const shop = await shopGetPrisma(id);
     if (!shop) return res.sendStatus(404);
+
+    // UnFavorite the shop
+    await shopUnFavoritePrisma(currentUser, id);
 
     // Retrieve current user after update of its favorited shops
     currentUser = await userGetPrisma(username);

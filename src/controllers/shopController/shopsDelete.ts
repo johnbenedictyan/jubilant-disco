@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import shopDeletePrisma from "../../utils/db/shop/shopDeletePrisma";
+import shopGetPrisma from "../../utils/db/shop/shopGetPrisma";
 import userGetPrisma from "../../utils/db/user/userGetPrisma";
 import shopViewer from "../../view/shopViewer";
 
@@ -25,8 +26,12 @@ export default async function shopsDelete(
     const currentUser = await userGetPrisma(userName);
     if (!currentUser) return res.sendStatus(401);
 
+    // Get the shop
+    const shop = await shopGetPrisma(id);
+    if (!shop) return res.sendStatus(404);
+
     // Delete the shop
-    const shop = await shopDeletePrisma(id);
+    await shopDeletePrisma(id);
 
     // Create the deleted shop view
     const shopView = shopViewer(shop, currentUser);

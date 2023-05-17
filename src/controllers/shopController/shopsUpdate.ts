@@ -1,8 +1,10 @@
-import { NextFunction, Response } from "express";
-import { Request } from "express-jwt";
-import shopUpdatePrisma from "../../utils/db/shop/shopUpdatePrisma";
-import userGetPrisma from "../../utils/db/user/userGetPrisma";
-import shopViewer from "../../view/shopViewer";
+import { NextFunction, Response } from 'express';
+import { Request } from 'express-jwt';
+
+import shopGetPrisma from '../../utils/db/shop/shopGetPrisma';
+import shopUpdatePrisma from '../../utils/db/shop/shopUpdatePrisma';
+import userGetPrisma from '../../utils/db/user/userGetPrisma';
+import shopViewer from '../../view/shopViewer';
 
 /**
  * Shop controller that must receive a request with an authenticated user.
@@ -28,8 +30,12 @@ export default async function shopsUpdate(
     const currentUser = await userGetPrisma(userName);
     if (!currentUser) return res.sendStatus(401);
 
+    // Get the shop
+    const shop = await shopGetPrisma(id);
+    if (!shop) return res.sendStatus(404);
+
     // Update the shop
-    const shop = await shopUpdatePrisma(id, {
+    const updatedShop = await shopUpdatePrisma(id, {
       name,
       addressField1,
       addressField2,
@@ -38,7 +44,7 @@ export default async function shopsUpdate(
     });
 
     // Create the shop view
-    const shopView = shopViewer(shop, currentUser);
+    const shopView = shopViewer(updatedShop, currentUser);
     return res.status(200).json({ shop: shopView });
   } catch (error) {
     return next(error);

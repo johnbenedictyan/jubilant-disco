@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import shopFavoritePrisma from "../../utils/db/shop/shopFavoritePrisma";
+import shopGetPrisma from "../../utils/db/shop/shopGetPrisma";
 import userGetPrisma from "../../utils/db/user/userGetPrisma";
 import shopViewer from "../../view/shopViewer";
 
@@ -25,9 +26,12 @@ export default async function shopsFavorite(
     let currentUser = await userGetPrisma(username);
     if (!currentUser) return res.sendStatus(401);
 
-    // Favorite the shop
-    const shop = await shopFavoritePrisma(currentUser, id);
+    // Get the shop
+    const shop = await shopGetPrisma(id);
     if (!shop) return res.sendStatus(404);
+
+    // Favorite the shop
+    await shopFavoritePrisma(currentUser, id);
 
     // Retrieve current user after update of its favorited shops
     currentUser = await userGetPrisma(username);
