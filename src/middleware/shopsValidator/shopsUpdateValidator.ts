@@ -1,5 +1,6 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
+
 import { ValidationError } from "../../utils/types";
 
 /**
@@ -41,14 +42,8 @@ export default async function shopsUpdateValidator(
   if (addressField3 && typeof addressField3 != "string")
     errors.body.push("Address Field 3 must be a string");
 
-  if (postalCode && typeof postalCode != "string")
-    errors.body.push("Postal Code must be a string");
-
-  if (postalCode && typeof postalCode == "string") {
-    const postalCodeValue = parseInt(postalCode);
-    if (isNaN(postalCodeValue))
-      errors.body.push("Postal Code is not a valid number");
-  }
+  if (postalCode && typeof postalCode != "number")
+    errors.body.push("Postal Code must be a valid number");
 
   if (errors.body.length) return res.status(400).json({ errors });
 
