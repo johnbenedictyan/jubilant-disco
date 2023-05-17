@@ -37,12 +37,12 @@ router.put(
 
 router.delete("/:slug", auth.authenticate, reviews.reviewsDelete);
 
-router.post("/:slug/favorite", auth.authenticate, reviews.reviewsFavorite);
+router.post("/:slug/like", auth.authenticate, reviews.reviewsLike);
 
 router.delete(
-  "/:slug/favorite",
+  "/:slug/like",
   auth.authenticate,
-  reviews.reviewsUnFavorite
+  reviews.reviewsUnLike
 );
 
 export default router;

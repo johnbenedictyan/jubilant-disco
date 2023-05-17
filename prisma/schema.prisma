@@ -11,29 +11,29 @@ datasource db {
 }
 
 model User {
-    email         String    @unique /// User email for registering and login use.
-    username      String    @id /// User internal id.
+    email         String   @unique /// User email for registering and login use.
+    username      String   @id /// User internal id.
     password      String /// User password stored in the database.
     bio           String? /// User biographical information.
     image         String? /// Link to the user avatar.
-    follows       User[]    @relation("UserFollows") /// List of other users that this one follows.
-    followedBy    User[]    @relation("UserFollows") /// List of other users that follows this one.
-    authored      Review[]  @relation("Author") /// List of reviews this user has written.
-    favorites     Review[]  @relation("Favorites") /// List of reviews this user has favorited.
-    favoriteShops Shop[]    @relation("FavoriteShops") // List of shops this user hs favorited.
+    follows       User[]   @relation("UserFollows") /// List of other users that this one follows.
+    followedBy    User[]   @relation("UserFollows") /// List of other users that follows this one.
+    authored      Review[] @relation("Author") /// List of reviews this user has written.
+    likes         Review[] @relation("Likes") /// List of reviews this user has liked.
+    favoriteShops Shop[]   @relation("FavoriteShops") // List of shops this user hs favorited.
 }
 
 model Review {
-    title          String    @unique
-    slug           String    @id /// Slug is an uri safe string derived from the title.
+    title          String   @unique
+    slug           String   @id /// Slug is an uri safe string derived from the title.
     description    String /// Description for SEO of this review.
     body           String /// The main content of the review.
     tagList        Tag[] /// List of tags associated with this review.
-    author         User      @relation("Author", fields: [authorUsername], references: [username], onDelete: Cascade) /// User that is the author of this review.
+    author         User     @relation("Author", fields: [authorUsername], references: [username], onDelete: Cascade) /// User that is the author of this review.
     authorUsername String /// Username of the author of this review.
-    favoritedBy    User[]    @relation("Favorites") /// List of users that have favorited this review.
-    createdAt      DateTime  @default(now())
-    updatedAt      DateTime  @default(now())
+    likedBy        User[]   @relation("Likes") /// List of users that have liked this review.
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @default(now())
 }
 
 model Tag {

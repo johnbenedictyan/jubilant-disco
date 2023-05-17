@@ -8,7 +8,7 @@ export default async function userGetEmailPrisma(email: string) {
       follows: true,
       followedBy: true,
       authored: true,
-      favorites: true,
+      likes: true,
     },
   });
   return user;

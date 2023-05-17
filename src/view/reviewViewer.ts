@@ -4,15 +4,15 @@ import profileViewer from "./profileViewer";
 type FullReview = Review & {
   tagList: Tag[];
   author: User & { followedBy: User[] };
-  _count: { favoritedBy: number };
+  _count: { likedBy: number };
 };
 
 export default function reviewViewer(
   review: FullReview,
-  currentUser?: User & { favorites: Review[] }
+  currentUser?: User & { likes: Review[] }
 ) {
-  const favorited = currentUser
-    ? currentUser.favorites.some((value) => value.slug === review.slug)
+  const liked = currentUser
+    ? currentUser.likes.some((value) => value.slug === review.slug)
     : false;
 
   const tagListView = review.tagList.map((tag) => tag.tagName).sort();
@@ -27,8 +27,8 @@ export default function reviewViewer(
     tagList: tagListView,
     createdAt: review.createdAt,
     updatedAt: review.updatedAt,
-    favorited: favorited,
-    favoritesCount: review._count.favoritedBy,
+    liked: liked,
+    likesCount: review._count.likedBy,
     author: authorView,
   };
   return reviewView;

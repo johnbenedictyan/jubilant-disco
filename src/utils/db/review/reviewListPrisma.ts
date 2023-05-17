@@ -3,7 +3,7 @@ import prisma from "../prisma";
 export default async function reviewsListPrisma(
   tag?: string,
   authorUsername?: string,
-  favorited?: string,
+  liked?: string,
   limit = 20,
   offset = 0
 ) {
@@ -11,7 +11,7 @@ export default async function reviewsListPrisma(
     where: {
       authorUsername,
       tagList: tag ? { some: { tagName: tag } } : undefined,
-      favoritedBy: favorited ? { some: { username: favorited } } : undefined,
+      likedBy: liked ? { some: { username: liked } } : undefined,
     },
     take: limit,
     skip: offset,
@@ -19,7 +19,7 @@ export default async function reviewsListPrisma(
     include: {
       author: { include: { followedBy: true } },
       tagList: true,
-      _count: { select: { favoritedBy: true } },
+      _count: { select: { likedBy: true } },
     },
   });
   return reviews;

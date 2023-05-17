@@ -22,7 +22,7 @@ export default async function reviewUpdatePrisma(
     include: {
       author: { include: { followedBy: true } },
       tagList: true,
-      _count: { select: { favoritedBy: true } },
+      _count: { select: { likedBy: true } },
     },
   });
   return review;

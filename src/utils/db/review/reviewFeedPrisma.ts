@@ -12,7 +12,7 @@ export default async function reviewFeedPrisma(
       author: {
         include: { followedBy: { where: { username: currentUser.username } } },
       },
-      _count: { select: { favoritedBy: true } },
+      _count: { select: { likedBy: true } },
     },
     take: limit,
     skip: offset,

@@ -1,6 +1,6 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
-import reviewFavoritePrisma from "../../utils/db/review/reviewFavoritePrisma";
+import reviewLikePrisma from "../../utils/db/review/reviewLikePrisma";
 import userGetPrisma from "../../utils/db/user/userGetPrisma";
 import reviewViewer from "../../view/reviewViewer";
 
@@ -12,7 +12,7 @@ import reviewViewer from "../../view/reviewViewer";
  * @param next NextFunction
  * @returns void
  */
-export default async function reviewsFavorite(
+export default async function reviewsLike(
   req: Request,
   res: Response,
   next: NextFunction
@@ -25,13 +25,13 @@ export default async function reviewsFavorite(
     let currentUser = await userGetPrisma(username);
     if (!currentUser) return res.sendStatus(401);
 
-    // Favorite the review
-    const review = await reviewFavoritePrisma(currentUser, slug);
+    // Like the review
+    const review = await reviewLikePrisma(currentUser, slug);
     if (!review) return res.sendStatus(404);
 
-    // Retrieve current user after update of its favorited reviews
+    // Retrieve current user after update of its liked reviews
     currentUser = await userGetPrisma(username);
-    if (!currentUser) return res.sendStatus(500); // The user should not have disappeared after having favorited an review
+    if (!currentUser) return res.sendStatus(500); // The user should not have disappeared after having liked an review
 
     // Create review view
     const reviewView = reviewViewer(review, currentUser);

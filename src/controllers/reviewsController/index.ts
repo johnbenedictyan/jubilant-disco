@@ -4,5 +4,5 @@ export { default as reviewsList } from "./reviewsList";
 export { default as reviewsUpdate } from "./reviewsUpdate";
 export { default as reviewsDelete } from "./reviewsDelete";
 export { default as reviewsFeed } from "./reviewsFeed";
-export { default as reviewsFavorite } from "./reviewsFavorite";
-export { default as reviewsUnFavorite } from "./reviewsUnFavorite";
+export { default as reviewsLike } from "./reviewsLike";
+export { default as reviewsUnLike } from "./reviewsUnLike";
