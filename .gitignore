@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-# /dist
+/dist
 
 # IDEs and editors
 /.idea
@@ -35,7 +35,7 @@ yarn-error.log*
 .env.development
 
 #Logs
-# logs/
+logs/
 
 #Database
 prisma/dev.db
