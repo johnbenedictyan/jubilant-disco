@@ -57,10 +57,8 @@ model Shop {
 }
 
 model Queue {
+    queueHash String @id
     name      String
-    queueHash String @unique
     Shop      Shop   @relation(fields: [shopId], references: [id])
     shopId    Int
-
-    @@id([name, shopId])
 }
