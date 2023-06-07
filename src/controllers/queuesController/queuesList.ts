@@ -7,7 +7,8 @@ import queueViewer from "../../view/queueViewer";
 
 function parseQueueListQuery(query: ParsedQs) {
   const { shopId } = query;
-  return { shopId };
+  const shopIdNumber = shopId ? parseInt(shopId as string) : undefined;
+  return { shopIdNumber };
 }
 
 /**
@@ -22,7 +23,7 @@ export default async function queuesList(
   res: Response,
   next: NextFunction
 ) {
-  const { shopId } = parseQueueListQuery(req.query);
+  const { shopIdNumber } = parseQueueListQuery(req.query);
   const username = req.auth?.user?.username;
 
   try {
@@ -30,7 +31,7 @@ export default async function queuesList(
     const currentUser = await userGetPrisma(username);
 
     // Get the queues
-    const queues = await queuesListPrisma(shopId);
+    const queues = await queuesListPrisma(shopIdNumber);
 
     // Create queues view
     const queuesListView = queues.map((queue) =>
