@@ -1,7 +1,8 @@
-import { Shop, Tag, User } from '@prisma/client';
+import { Queue, Shop, Tag, User } from "@prisma/client";
 
 type FullShop = Shop & {
   tagList: Tag[];
+  queueList: Queue[];
   _count: { favoritedBy: number };
 };
 
@@ -15,6 +16,8 @@ export default function shopViewer(
 
   const tagListView = shop.tagList.map((tag) => tag.tagName).sort();
 
+  const queueListView = shop.queueList.map((queue) => queue.name).sort();
+
   const shopView = {
     name: shop.name,
     addressField1: shop.addressField1,
@@ -23,6 +26,7 @@ export default function shopViewer(
     postalCode: shop.postalCode,
     rating: shop.rating,
     tagList: tagListView,
+    queueList: queueListView,
     favorited: favorited,
     favoritesCount: shop._count.favoritedBy,
   };

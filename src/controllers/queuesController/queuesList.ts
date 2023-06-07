@@ -34,7 +34,7 @@ export default async function queuesList(
     const queues = await queuesListPrisma(shopIdNumber);
 
     // Create queues view
-    const queuesListView = queues.map((queue: any) =>
+    const queuesListView = queues.map((queue) =>
       currentUser ? queueViewer(queue, currentUser) : queueViewer(queue)
     );
 
