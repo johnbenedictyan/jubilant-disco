@@ -16,7 +16,11 @@ export default async function shopCreatePrisma(
 ) {
   const shop = await prisma.shop.create({
     data: { ...info, tagList: { connect: tagList } },
-    include: { tagList: true, _count: { select: { favoritedBy: true } } },
+    include: {
+      tagList: true,
+      queueList: true,
+      _count: { select: { favoritedBy: true } },
+    },
   });
   return shop;
 }

@@ -16,7 +16,9 @@ export default function shopViewer(
 
   const tagListView = shop.tagList.map((tag) => tag.tagName).sort();
 
-  const queueListView = shop.queueList.map((queue) => queue.name).sort();
+  const queueListView = shop.queueList.sort((q1, q2) =>
+    q1.name.localeCompare(q2.name)
+  );
 
   const shopView = {
     name: shop.name,
