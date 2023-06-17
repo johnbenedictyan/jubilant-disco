@@ -1,11 +1,12 @@
 import express from "express";
 
 import {
-  authErrorHandler,
-  prismaErrorHandler,
+    authErrorHandler,
+    prismaErrorHandler,
 } from "./middleware/errorHandling";
 import generalErrorHandler from "./middleware/errorHandling/generalErrorHandler";
 import profilesRouter from "./routes/api/profiles";
+import queueItemsRouter from "./routes/api/queueItems";
 import queuesRouter from "./routes/api/queues";
 import reviewsRouter from "./routes/api/reviews";
 import shopsRouter from "./routes/api/shops";
@@ -31,6 +32,8 @@ app.use("/api/shops", shopsRouter);
 app.use("/api/tags", tagsRouter);
 
 app.use("/api/queues", queuesRouter);
+
+app.use("/api/queueItems", queueItemsRouter);
 
 app.get("/", function (_req, res) {
   return res.send("This is just the backend for RealWorld");
