@@ -32,7 +32,7 @@ export default async function queuesCreate(
     if (!currentUser) return res.sendStatus(401);
 
     // Create the queue
-    const queue = await queueCreatePrisma({ queueHash, name, shopId });
+    const queue = await queueCreatePrisma({ hash: queueHash, name, shopId });
 
     // Create queue view
     const queueView = queueViewer(queue, currentUser);

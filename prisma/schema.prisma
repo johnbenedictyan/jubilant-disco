@@ -71,10 +71,11 @@ model QueueItem {
     shopId       Int
     User         User    @relation(fields: [userUsername], references: [username])
     userUsername String
-    Queue        Queue   @relation(fields: [queueHash], references: [hash])
-    queueHash    String
+    Queue        Queue?  @relation(fields: [queueHash], references: [hash])
+    queueHash    String?
     number       Int
     anyFlag      Boolean @default(false)
 
     @@id([shopId, userUsername])
+    @@unique([userUsername, queueHash, number])
 }

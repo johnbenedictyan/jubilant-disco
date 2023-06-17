@@ -1,4 +1,4 @@
-import prisma from '../prisma';
+import prisma from "../prisma";
 
 interface UpdateFields {
   name?: string;
@@ -16,6 +16,7 @@ export default async function shopUpdatePrisma(id: number, info: UpdateFields) {
     },
     include: {
       queueList: true,
+      queueItemList: true,
       tagList: true,
       _count: { select: { favoritedBy: true } },
     },
