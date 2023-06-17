@@ -6,6 +6,7 @@ export default async function shopGetPrisma(id: number) {
     where: { id },
     include: {
       queueList: true,
+      queueItemList: true,
       tagList: true,
       _count: { select: { favoritedBy: true } },
     },

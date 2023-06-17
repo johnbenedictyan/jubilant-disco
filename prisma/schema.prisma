@@ -55,15 +55,15 @@ model Shop {
     tagList       Tag[] // Tags associated with this shop
     queueList     Queue[]
     favoritedBy   User[]      @relation("FavoriteShops")
-    queueItems    QueueItem[]
+    queueItemList QueueItem[]
 }
 
 model Queue {
-    hash       String      @id
-    name       String
-    Shop       Shop        @relation(fields: [shopId], references: [id])
-    shopId     Int
-    queueItems QueueItem[]
+    hash          String      @id
+    name          String
+    Shop          Shop        @relation(fields: [shopId], references: [id])
+    shopId        Int
+    queueItemList QueueItem[]
 }
 
 model QueueItem {

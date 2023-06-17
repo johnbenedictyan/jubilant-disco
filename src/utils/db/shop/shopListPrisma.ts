@@ -26,6 +26,7 @@ export default async function shopsListPrisma(
     orderBy: { rating: "desc" },
     include: {
       queueList: true,
+      queueItemList: true,
       tagList: true,
       _count: { select: { favoritedBy: true } },
     },

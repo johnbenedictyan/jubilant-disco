@@ -1,8 +1,8 @@
 import prisma from "../prisma";
 
-export default async function queueDeletePrisma(queueHash: string) {
+export default async function queueDeletePrisma(hash: string) {
   const queue = await prisma.queue.delete({
-    where: { queueHash },
+    where: { hash },
   });
   return queue;
 }
