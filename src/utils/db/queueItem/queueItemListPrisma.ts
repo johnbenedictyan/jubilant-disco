@@ -1,11 +1,11 @@
 import prisma from "../prisma";
 
-export default async function queuesListPrisma(shopId: number) {
-  const queues = await prisma.queue.findMany({
+export default async function queueItemsListPrisma(shopId?: number) {
+  const queueItems = await prisma.queueItem.findMany({
     where: {
       shopId,
     },
-    orderBy: { name: "desc" },
+    orderBy: { number: "asc" },
   });
-  return queues;
+  return queueItems;
 }
