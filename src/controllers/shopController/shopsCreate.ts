@@ -12,7 +12,7 @@ interface Shop {
   addressField1: string;
   addressField2: string;
   addressField3: string;
-  postalCode: number;
+  postalCode: string;
   tagList?: Array<string>;
 }
 

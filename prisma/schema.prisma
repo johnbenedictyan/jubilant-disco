@@ -50,7 +50,7 @@ model Shop {
     addressField1 String
     addressField2 String
     addressField3 String
-    postalCode    Int
+    postalCode    String
     rating        Int         @default(0)
     tagList       Tag[] // Tags associated with this shop
     queueList     Queue[]
