@@ -1,7 +1,6 @@
 import prisma from "../prisma";
 
 export default async function shopsListPrisma(
-  id?: number,
   name?: string,
   addressField1?: string,
   addressField2?: string,
@@ -14,7 +13,6 @@ export default async function shopsListPrisma(
 ) {
   const shops = await prisma.shop.findMany({
     where: {
-      id,
       name,
       addressField1,
       addressField2,

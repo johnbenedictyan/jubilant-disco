@@ -21,11 +21,9 @@ function parseShopListQuery(query: ParsedQs) {
   addressField1 = addressField1 ? (addressField1 as string) : undefined;
   addressField2 = addressField2 ? (addressField2 as string) : undefined;
   addressField3 = addressField3 ? (addressField3 as string) : undefined;
+  postalCode = postalCode ? (postalCode as string) : undefined;
   favorited = favorited ? (favorited as string) : undefined;
   tag = tag ? (tag as string) : undefined;
-  const postalCodeNumber = postalCode
-    ? parseInt(postalCode as string)
-    : undefined;
   const limitNumber = limit ? parseInt(limit as string) : undefined;
   const offsetNumber = offset ? parseInt(offset as string) : undefined;
   return {
@@ -33,7 +31,7 @@ function parseShopListQuery(query: ParsedQs) {
     addressField1,
     addressField2,
     addressField3,
-    postalCodeNumber,
+    postalCode,
     tag,
     author,
     favorited,
@@ -59,7 +57,7 @@ export default async function shopsList(
     addressField1,
     addressField2,
     addressField3,
-    postalCodeNumber,
+    postalCode,
     tag,
     favorited,
     limit,
@@ -77,7 +75,7 @@ export default async function shopsList(
       addressField1,
       addressField2,
       addressField3,
-      postalCodeNumber,
+      postalCode,
       tag,
       favorited,
       limit,

@@ -42,8 +42,8 @@ export default async function shopsUpdateValidator(
   if (addressField3 && typeof addressField3 != "string")
     errors.body.push("Address Field 3 must be a string");
 
-  if (postalCode && typeof postalCode != "number")
-    errors.body.push("Postal Code must be a valid number");
+  if (postalCode && typeof postalCode != "string")
+    errors.body.push("Postal Code must be a string");
 
   if (errors.body.length) return res.status(400).json({ errors });
 

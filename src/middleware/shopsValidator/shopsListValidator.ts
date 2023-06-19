@@ -43,12 +43,6 @@ export default async function shopsListValidator(
   if (postalCode && typeof postalCode != "string")
     errors.query.push("Postal Code must be a string");
 
-  if (postalCode && typeof postalCode == "string") {
-    const postalCodeValue = parseInt(postalCode);
-    if (isNaN(postalCodeValue))
-      errors.query.push("Postal Code is not a valid number");
-  }
-
   if (tag && typeof tag != "string") errors.query.push("tag must be a string");
 
   if (favorited && typeof favorited != "string")

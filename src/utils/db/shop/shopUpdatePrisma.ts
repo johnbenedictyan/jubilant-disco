@@ -5,7 +5,7 @@ interface UpdateFields {
   addressField1?: string;
   addressField2?: string;
   addressField3?: string;
-  postalCode?: number;
+  postalCode?: string;
 }
 
 export default async function shopUpdatePrisma(id: number, info: UpdateFields) {
