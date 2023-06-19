@@ -26,6 +26,7 @@ export default function shopViewer(
   );
 
   const shopView = {
+    id: shop.id,
     name: shop.name,
     addressField1: shop.addressField1,
     addressField2: shop.addressField2,
