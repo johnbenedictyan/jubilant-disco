@@ -4,7 +4,7 @@ type FullShop = Shop & {
   tagList: Tag[];
   queueList: Queue[];
   queueItemList: QueueItem[];
-  _count: { favoritedBy: number };
+  _count: { favoritedBy: number; queueItemList: number };
 };
 
 export default function shopViewer(
@@ -38,6 +38,7 @@ export default function shopViewer(
     queueItemList: queueItemListView,
     favorited: favorited,
     favoritesCount: shop._count.favoritedBy,
+    queueItemCount: shop._count.queueItemList,
   };
   return shopView;
 }
