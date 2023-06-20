@@ -13,6 +13,10 @@ export default async function queueUpdatePrisma(
     data: {
       ...info,
     },
+    include: {
+      queueItemList: true,
+      _count: { select: { queueItemList: true } },
+    },
   });
   return queue;
 }

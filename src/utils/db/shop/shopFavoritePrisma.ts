@@ -10,7 +10,7 @@ export default async function shopFavoritePrisma(
     data: { favoritedBy: { connect: { username: currentUser.username } } },
     include: {
       tagList: true,
-      _count: { select: { favoritedBy: true } },
+      _count: { select: { favoritedBy: true, queueItemList: true } },
     },
   });
   return shop;

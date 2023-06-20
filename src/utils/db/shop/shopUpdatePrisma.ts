@@ -18,7 +18,7 @@ export default async function shopUpdatePrisma(id: number, info: UpdateFields) {
       queueList: true,
       queueItemList: true,
       tagList: true,
-      _count: { select: { favoritedBy: true } },
+      _count: { select: { favoritedBy: true, queueItemList: true } },
     },
   });
   return shop;

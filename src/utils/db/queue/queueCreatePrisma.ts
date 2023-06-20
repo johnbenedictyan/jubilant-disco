@@ -11,6 +11,10 @@ export default async function queueCreatePrisma(info: RequiredFields) {
     data: {
       ...info,
     },
+    include: {
+      queueItemList: true,
+      _count: { select: { queueItemList: true } },
+    },
   });
   return queue;
 }
