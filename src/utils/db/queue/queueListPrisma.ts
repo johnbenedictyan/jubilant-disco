@@ -6,6 +6,10 @@ export default async function queuesListPrisma(shopId?: number) {
       shopId,
     },
     orderBy: { name: "desc" },
+    include: {
+      queueItemList: true,
+      _count: { select: { queueItemList: true } },
+    },
   });
   return queues;
 }
