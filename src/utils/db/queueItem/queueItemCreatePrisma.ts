@@ -1,10 +1,8 @@
 import prisma from "../prisma";
 
 interface RequiredFields {
-  queueHash?: string;
+  queueHash: string;
   userUsername: string;
-  shopId: number;
-  number: number;
 }
 
 export default async function queueItemCreatePrisma(info: RequiredFields) {

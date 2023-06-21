@@ -11,18 +11,19 @@ datasource db {
 }
 
 model User {
-    email         String      @unique /// User email for registering and login use.
-    username      String      @id /// User internal id.
+    email         String         @unique /// User email for registering and login use.
+    username      String         @id /// User internal id.
     password      String /// User password stored in the database.
     bio           String? /// User biographical information.
     image         String? /// Link to the user avatar.
-    follows       User[]      @relation("UserFollows") /// List of other users that this one follows.
-    followedBy    User[]      @relation("UserFollows") /// List of other users that follows this one.
-    authored      Review[]    @relation("Author") /// List of reviews this user has written.
-    likes         Review[]    @relation("Likes") /// List of reviews this user has liked.
-    favoriteShops Shop[]      @relation("FavoriteShops") // List of shops this user hs favorited.
-    role          String      @default("user")
+    follows       User[]         @relation("UserFollows") /// List of other users that this one follows.
+    followedBy    User[]         @relation("UserFollows") /// List of other users that follows this one.
+    authored      Review[]       @relation("Author") /// List of reviews this user has written.
+    likes         Review[]       @relation("Likes") /// List of reviews this user has liked.
+    favoriteShops Shop[]         @relation("FavoriteShops") // List of shops this user hs favorited.
+    role          String         @default("user")
     inQueueFor    QueueItem[]
+    AnyQueueItem  AnyQueueItem[]
 }
 
 model Review {
@@ -45,18 +46,18 @@ model Tag {
 }
 
 model Shop {
-    id            Int         @id @default(autoincrement())
+    id            Int            @id @default(autoincrement())
     name          String // The string of the shop
     addressField1 String
     addressField2 String
     addressField3 String
     postalCode    String
     image         String?
-    rating        Int         @default(0)
+    rating        Int            @default(0)
     tagList       Tag[] // Tags associated with this shop
     queueList     Queue[]
-    favoritedBy   User[]      @relation("FavoriteShops")
-    queueItemList QueueItem[]
+    favoritedBy   User[]         @relation("FavoriteShops")
+    anyQueueList  AnyQueueItem[]
 }
 
 model Queue {
@@ -68,17 +69,22 @@ model Queue {
 }
 
 model QueueItem {
-    Shop         Shop     @relation(fields: [shopId], references: [id])
-    shopId       Int
     User         User     @relation(fields: [userUsername], references: [username])
     userUsername String
-    Queue        Queue?   @relation(fields: [queueHash], references: [hash])
-    queueHash    String?
-    number       Int
-    anyFlag      Boolean  @default(false)
+    Queue        Queue    @relation(fields: [queueHash], references: [hash])
+    queueHash    String
     insert_date  DateTime @default(now())
     valid        Boolean  @default(true)
 
+    @@id([queueHash, userUsername])
+}
+
+model AnyQueueItem {
+    User         User     @relation(fields: [userUsername], references: [username])
+    userUsername String
+    Shop         Shop     @relation(fields: [shopId], references: [id])
+    shopId       Int
+    insert_date  DateTime @default(now())
+
     @@id([shopId, userUsername])
-    @@unique([userUsername, queueHash, number])
 }

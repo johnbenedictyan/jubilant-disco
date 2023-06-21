@@ -18,8 +18,7 @@ export default async function queueItemsGet(
   next: NextFunction
 ) {
   const userUsername = req.params.userUsername;
-  const shopId = req.params.shopId!;
-  const shopIdNumber = parseInt(shopId as string);
+  const queueHash = req.params.queueHash;
   const username = req.auth?.user?.username;
 
   try {
@@ -29,7 +28,7 @@ export default async function queueItemsGet(
     // Get the queueItem
     const queueItem = await queueItemGetPrisma({
       userUsername,
-      shopId: shopIdNumber,
+      queueHash,
     });
     if (!queueItem) return res.sendStatus(404);
 

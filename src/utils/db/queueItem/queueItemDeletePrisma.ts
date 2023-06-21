@@ -2,13 +2,13 @@ import prisma from "../prisma";
 
 interface RequiredFields {
   userUsername: string;
-  shopId: number;
+  queueHash: string;
 }
 
 export default async function queueItemDeletePrisma(info: RequiredFields) {
   const queueItem = await prisma.queueItem.delete({
     where: {
-      shopId_userUsername: {
+      queueHash_userUsername: {
         ...info,
       },
     },

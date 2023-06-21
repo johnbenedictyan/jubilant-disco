@@ -5,11 +5,8 @@ export default function queueItemViewer(
   currentUser?: User
 ) {
   const queueItemView = {
-    shopId: queueItem.shopId,
     userUsername: queueItem.userUsername,
     queueHash: queueItem.queueHash,
-    number: queueItem.number,
-    anyFlag: queueItem.anyFlag,
     insertDate: queueItem.insert_date,
     valid: queueItem.valid,
   };

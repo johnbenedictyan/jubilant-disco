@@ -1,10 +1,16 @@
-import { Queue, Shop, Tag, User, QueueItem } from "@prisma/client";
+import {
+    AnyQueueItem,
+    Queue,
+    Shop,
+    Tag,
+    User
+} from "@prisma/client";
 
 type FullShop = Shop & {
   tagList: Tag[];
   queueList: Queue[];
-  queueItemList: QueueItem[];
-  _count: { favoritedBy: number; queueItemList: number };
+  anyQueueList: AnyQueueItem[];
+  _count: { favoritedBy: number; anyQueueList: number };
 };
 
 export default function shopViewer(
@@ -21,10 +27,6 @@ export default function shopViewer(
     q1.name.localeCompare(q2.name)
   );
 
-  const queueItemListView = shop.queueItemList.sort(
-    (qi1, qi2) => qi1.number - qi2.number
-  );
-
   const shopView = {
     id: shop.id,
     name: shop.name,
@@ -35,10 +37,10 @@ export default function shopViewer(
     rating: shop.rating,
     tagList: tagListView,
     queueList: queueListView,
-    queueItemList: queueItemListView,
+    anyQueueList: shop.anyQueueList,
     favorited: favorited,
     favoritesCount: shop._count.favoritedBy,
-    queueItemCount: shop._count.queueItemList,
+    queueItemCount: shop._count.anyQueueList,
   };
   return shopView;
 }

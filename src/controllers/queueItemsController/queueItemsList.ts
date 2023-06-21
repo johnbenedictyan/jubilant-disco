@@ -6,9 +6,8 @@ import userGetPrisma from "../../utils/db/user/userGetPrisma";
 import queueItemViewer from "../../view/queueItemViewer";
 
 function parseQueueItemListQuery(query: ParsedQs) {
-  const { shopId } = query;
-  const shopIdNumber = shopId ? parseInt(shopId as string) : undefined;
-  return { shopIdNumber };
+  const { queueHash } = query;
+  return { queueHash };
 }
 
 /**
@@ -23,7 +22,7 @@ export default async function queueItemsList(
   res: Response,
   next: NextFunction
 ) {
-  const { shopIdNumber } = parseQueueItemListQuery(req.query);
+  const queueHash = req.params.queueHash;
   const username = req.auth?.user?.username;
 
   try {
@@ -31,11 +30,13 @@ export default async function queueItemsList(
     const currentUser = await userGetPrisma(username);
 
     // Get the queueItems
-    const queueItems = await queueItemsListPrisma(shopIdNumber);
+    const queueItems = await queueItemsListPrisma(queueHash);
 
     // Create queueItems view
     const queueItemsListView = queueItems.map((queueItem) =>
-      currentUser ? queueItemViewer(queueItem, currentUser) : queueItemViewer(queueItem)
+      currentUser
+        ? queueItemViewer(queueItem, currentUser)
+        : queueItemViewer(queueItem)
     );
 
     return res.json({

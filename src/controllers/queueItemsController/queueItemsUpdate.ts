@@ -19,10 +19,9 @@ export default async function queueItemsUpdate(
   next: NextFunction
 ) {
   const userUsername = req.params.userUsername;
-  const shopId = req.params.shopId!;
-  const shopIdNumber = parseInt(shopId as string);
+  const queueHash = req.params.queueHash!;
 
-  const { number } = req.body.queueItem;
+  const { valid } = req.body.queueItem;
   const userName = req.auth?.user?.username;
 
   try {
@@ -31,8 +30,8 @@ export default async function queueItemsUpdate(
     if (!currentUser) return res.sendStatus(401);
 
     // Update the queueItem
-    const queueItem = await queueItemUpdatePrisma(userUsername, shopIdNumber, {
-      number,
+    const queueItem = await queueItemUpdatePrisma(userUsername, queueHash, {
+      valid,
     });
 
     // Create the queueItem view

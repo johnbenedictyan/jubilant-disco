@@ -2,13 +2,13 @@ import prisma from "../prisma";
 
 interface RequiredFields {
   userUsername: string;
-  shopId: number;
+  queueHash: string;
 }
 
 export default async function queueItemGetPrisma(info: RequiredFields) {
   const queueItem = await prisma.queueItem.findUnique({
     where: {
-      shopId_userUsername: {
+      queueHash_userUsername: {
         ...info,
       },
     },

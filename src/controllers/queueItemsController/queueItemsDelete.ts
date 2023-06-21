@@ -18,8 +18,7 @@ export default async function queueItemsDelete(
   next: NextFunction
 ) {
   const userUsername = req.params.userUsername;
-  const shopId = req.params.shopId!;
-  const shopIdNumber = parseInt(shopId as string);
+  const queueHash = req.params.queueHash;
 
   const userName = req.auth?.user?.username;
 
@@ -31,7 +30,7 @@ export default async function queueItemsDelete(
     // Delete the queueItem
     const queueItem = await queueItemDeletePrisma({
       userUsername,
-      shopId: shopIdNumber,
+      queueHash,
     });
 
     // Create the deleted queueItem view
