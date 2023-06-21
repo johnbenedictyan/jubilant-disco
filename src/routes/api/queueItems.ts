@@ -7,7 +7,7 @@ const router = Router();
 router.get("/", auth.optionalAuthenticate, queueItems.queueItemsList);
 
 router.get(
-  "/:shopId/:userUsername",
+  "/:queueHash/:userUsername",
   auth.optionalAuthenticate,
   queueItems.queueItemsGet
 );
@@ -15,13 +15,13 @@ router.get(
 router.post("/", auth.authenticate, queueItems.queueItemsCreate);
 
 router.put(
-  "/:shopId/:userUsername",
+  "/:queueHash/:userUsername",
   auth.authenticate,
   queueItems.queueItemsUpdate
 );
 
 router.delete(
-  "/:shopId/:userUsername",
+  "/:queueHash/:userUsername",
   auth.authenticate,
   queueItems.queueItemsDelete
 );

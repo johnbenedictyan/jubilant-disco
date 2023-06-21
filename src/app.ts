@@ -5,6 +5,7 @@ import {
     prismaErrorHandler,
 } from "./middleware/errorHandling";
 import generalErrorHandler from "./middleware/errorHandling/generalErrorHandler";
+import anyQueueItemsRouter from "./routes/api/anyQueueItems";
 import profilesRouter from "./routes/api/profiles";
 import queueItemsRouter from "./routes/api/queueItems";
 import queuesRouter from "./routes/api/queues";
@@ -34,6 +35,8 @@ app.use("/api/tags", tagsRouter);
 app.use("/api/queues", queuesRouter);
 
 app.use("/api/queueItems", queueItemsRouter);
+
+app.use("/api/anyQueueItems", anyQueueItemsRouter);
 
 app.get("/", function (_req, res) {
   return res.send("This is just the backend for RealWorld");
