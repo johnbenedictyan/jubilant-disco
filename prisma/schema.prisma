@@ -68,14 +68,16 @@ model Queue {
 }
 
 model QueueItem {
-    Shop         Shop    @relation(fields: [shopId], references: [id])
+    Shop         Shop     @relation(fields: [shopId], references: [id])
     shopId       Int
-    User         User    @relation(fields: [userUsername], references: [username])
+    User         User     @relation(fields: [userUsername], references: [username])
     userUsername String
-    Queue        Queue?  @relation(fields: [queueHash], references: [hash])
+    Queue        Queue?   @relation(fields: [queueHash], references: [hash])
     queueHash    String?
     number       Int
-    anyFlag      Boolean @default(false)
+    anyFlag      Boolean  @default(false)
+    insert_date  DateTime @default(now())
+    valid        Boolean  @default(true)
 
     @@id([shopId, userUsername])
     @@unique([userUsername, queueHash, number])
