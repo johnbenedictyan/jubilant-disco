@@ -10,6 +10,8 @@ export default function queueItemViewer(
     queueHash: queueItem.queueHash,
     number: queueItem.number,
     anyFlag: queueItem.anyFlag,
+    insertDate: queueItem.insert_date,
+    valid: queueItem.valid,
   };
   return queueItemView;
 }
