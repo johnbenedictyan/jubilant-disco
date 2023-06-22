@@ -6,8 +6,16 @@ import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import queueItemViewer from "../../view/queueItemViewer";
 
 function parseQueueItemListQuery(query: ParsedQs) {
-  const { queueHash } = query;
-  return { queueHash };
+  let { queueHash, userUsername, valid } = query;
+  queueHash = queueHash ? (queueHash as string) : undefined;
+  userUsername = userUsername ? (userUsername as string) : undefined;
+  const validBool = valid ? Boolean(valid) : undefined;
+
+  return {
+    queueHash,
+    userUsername,
+    validBool,
+  };
 }
 
 /**
@@ -22,7 +30,9 @@ export default async function queueItemsList(
   res: Response,
   next: NextFunction
 ) {
-  const queueHash = req.params.queueHash;
+  const { queueHash, userUsername, validBool } = parseQueueItemListQuery(
+    req.query
+  );
   const username = req.auth?.user?.username;
 
   try {
@@ -30,7 +40,11 @@ export default async function queueItemsList(
     const currentUser = await userGetPrisma(username);
 
     // Get the queueItems
-    const queueItems = await queueItemsListPrisma(queueHash);
+    const queueItems = await queueItemsListPrisma(
+      queueHash,
+      userUsername,
+      validBool
+    );
 
     // Create queueItems view
     const queueItemsListView = queueItems.map((queueItem) =>

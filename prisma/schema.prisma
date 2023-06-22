@@ -87,4 +87,5 @@ model AnyQueueItem {
     Shop         Shop     @relation(fields: [shopId], references: [id])
     shopId       Int
     insert_date  DateTime @default(now())
+    valid        Boolean  @default(true)
 }

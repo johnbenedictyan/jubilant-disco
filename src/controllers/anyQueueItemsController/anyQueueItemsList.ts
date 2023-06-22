@@ -6,9 +6,17 @@ import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import anyQueueItemViewer from "../../view/anyQueueItemViewer";
 
 function parseAnyQueueItemListQuery(query: ParsedQs) {
-  const { shopId } = query;
+  let { shopId, userUsername, valid } = query;
+  userUsername = userUsername ? (userUsername as string) : undefined;
+  valid = valid ? (valid as string) : undefined;
   const shopIdNumber = shopId ? parseInt(shopId as string) : undefined;
-  return { shopIdNumber };
+  const validBool = valid ? Boolean(valid) : undefined;
+
+  return {
+    shopIdNumber,
+    userUsername,
+    validBool,
+  };
 }
 
 /**
@@ -23,9 +31,9 @@ export default async function anyQueueItemsList(
   res: Response,
   next: NextFunction
 ) {
-  const {
-    shopIdNumber
-  } = parseAnyQueueItemListQuery(req.query);
+  const { shopIdNumber, userUsername, validBool } = parseAnyQueueItemListQuery(
+    req.query
+  );
   const username = req.auth?.user?.username;
 
   try {
@@ -33,7 +41,11 @@ export default async function anyQueueItemsList(
     const currentUser = await userGetPrisma(username);
 
     // Get the anyQueueItems
-    const anyQueueItems = await anyQueueItemsListPrisma(shopIdNumber);
+    const anyQueueItems = await anyQueueItemsListPrisma(
+      shopIdNumber,
+      userUsername,
+      validBool
+    );
 
     // Create anyQueueItems view
     const anyQueueItemsListView = anyQueueItems.map((anyQueueItem) =>
