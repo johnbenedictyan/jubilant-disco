@@ -18,8 +18,7 @@ export default async function queueItemsUpdate(
   res: Response,
   next: NextFunction
 ) {
-  const userUsername = req.params.userUsername;
-  const queueHash = req.params.queueHash!;
+  const id = parseInt(req.params.id as string);
 
   const { valid } = req.body.queueItem;
   const userName = req.auth?.user?.username;
@@ -30,7 +29,7 @@ export default async function queueItemsUpdate(
     if (!currentUser) return res.sendStatus(401);
 
     // Update the queueItem
-    const queueItem = await queueItemUpdatePrisma(userUsername, queueHash, {
+    const queueItem = await queueItemUpdatePrisma(id, {
       valid,
     });
 

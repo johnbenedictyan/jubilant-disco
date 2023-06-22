@@ -6,18 +6,10 @@ const router = Router();
 
 router.get("/", auth.optionalAuthenticate, anyQueueItems.anyQueueItemsList);
 
-router.get(
-  "/:shopId/:userUsername",
-  auth.optionalAuthenticate,
-  anyQueueItems.anyQueueItemsGet
-);
+router.get("/:id", auth.optionalAuthenticate, anyQueueItems.anyQueueItemsGet);
 
 router.post("/", auth.authenticate, anyQueueItems.anyQueueItemsCreate);
 
-router.delete(
-  "/:shopId/:userUsername",
-  auth.authenticate,
-  anyQueueItems.anyQueueItemsDelete
-);
+router.delete("/:id", auth.authenticate, anyQueueItems.anyQueueItemsDelete);
 
 export default router;

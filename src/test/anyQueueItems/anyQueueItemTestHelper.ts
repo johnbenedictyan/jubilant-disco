@@ -1,6 +1,6 @@
-import { Shop, User } from '@prisma/client';
+import { Shop, User } from "@prisma/client";
 
-import prisma from '../../utils/db/prisma';
+import prisma from "../../utils/db/prisma";
 
 const createTestAnyQueueItem = async (testUser: User, testShop: Shop) => {
   const testAnyQueueItem = await prisma.anyQueueItem.create({
@@ -20,20 +20,13 @@ const createTestAnyQueueItem = async (testUser: User, testShop: Shop) => {
   return testAnyQueueItem;
 };
 
-const deleteTestAnyQueueItem = async (testUser: User, testShop: Shop) => {
+const deleteTestAnyQueueItem = async (id: number) => {
   const testAnyQueueItem = await prisma.anyQueueItem.delete({
     where: {
-      shopId_userUsername: {
-        shopId: testShop.id,
-        userUsername: testUser.username,
-      },
+      id,
     },
   });
   return testAnyQueueItem;
 };
 
-
-export {
-    createTestAnyQueueItem,
-    deleteTestAnyQueueItem
-};
+export { createTestAnyQueueItem, deleteTestAnyQueueItem };

@@ -5,6 +5,7 @@ export default function anyQueueItemViewer(
   currentUser?: User
 ) {
   const anyQueueItemView = {
+    id: anyQueueItem.id,
     userUsername: anyQueueItem.userUsername,
     shopId: anyQueueItem.shopId,
     insertDate: anyQueueItem.insert_date,
