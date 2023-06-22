@@ -43,6 +43,7 @@ export default async function shopsCreateValidator(
     addressField1,
     addressField2,
     addressField3,
+    postalCode
   };
   for (const [variable, content] of Object.entries(requiredStringChecks)) {
     if (typeof content != "string" || content.length == 0) {
@@ -50,14 +51,14 @@ export default async function shopsCreateValidator(
     }
   }
 
-  const requiredNumberChecks = {
-    postalCode,
-  };
-  for (const [variable, content] of Object.entries(requiredNumberChecks)) {
-    if (typeof content != "number") {
-      errors.body.push(`${variable} field must be a valid number`);
-    }
-  }
+//   const requiredNumberChecks = {
+//     postalCode,
+//   };
+//   for (const [variable, content] of Object.entries(requiredNumberChecks)) {
+//     if (typeof content != "number") {
+//       errors.body.push(`${variable} field must be a valid number`);
+//     }
+//   }
 
   // Checks if tagList is an array of strings in case it is not undefined.
   if (tagList && !Array.isArray(tagList))

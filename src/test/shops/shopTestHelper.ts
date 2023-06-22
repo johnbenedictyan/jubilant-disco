@@ -30,10 +30,10 @@ const createTestShop = async () => {
   return testShop;
 };
 
-const deleteTestShop = async (shop: Shop) => {
+const deleteTestShop = async (shopId: number) => {
   const testShop = await prisma.shop.delete({
     where: {
-      id: shop.id,
+      id: shopId,
     },
   });
   return testShop;
