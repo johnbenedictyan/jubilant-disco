@@ -2,7 +2,7 @@ import { QueueItem, User } from "@prisma/client";
 
 export default function queueItemViewer(
   queueItem: QueueItem,
-  currentUser?: User
+  currentUser?: User | null
 ) {
   const queueItemView = {
     userUsername: queueItem.userUsername,

@@ -20,12 +20,24 @@ export default async function queueItemsDelete(
   const userUsername = req.params.userUsername;
   const queueHash = req.params.queueHash;
 
-  const userName = req.auth?.user?.username;
+  const loggedInUsername = req.auth?.user?.username;
+
+  let authFlag = false;
 
   try {
-    // Get current user
-    const currentUser = await userGetPrisma(userName);
-    if (!currentUser) return res.sendStatus(401);
+    // Get the current logined user
+    const currentUser = await userGetPrisma(loggedInUsername);
+
+    // Get the user in whose queue item is being deleted
+    const requestedUser = await userGetPrisma(userUsername);
+
+    if (!requestedUser) return res.sendStatus(401);
+
+    if (currentUser) {
+      authFlag = authFlag || currentUser.role == "admin";
+    }
+
+    if (!authFlag) return res.sendStatus(401);
 
     // Delete the queueItem
     const queueItem = await queueItemDeletePrisma({
