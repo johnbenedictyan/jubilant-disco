@@ -5,13 +5,13 @@ import userUpdatePrisma from "../../utils/db/user/userUpdatePrisma";
 import userViewer from "../../view/userViewer";
 
 /**
- * User controller that updates the current user with info given on the body of the request.
+ * Users controller that updates the current user with info given on the body of the request.
  * @param req Request with authenticated user in the auth property and new information on the body of the request
  * @param res Response
  * @param next NextFunction
  * @returns
  */
-export default async function userUpdate(
+export default async function usersUpdate(
   req: Request,
   res: Response,
   next: NextFunction

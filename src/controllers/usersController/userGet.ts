@@ -5,13 +5,13 @@ import userGetPrisma from "../../utils/db/user/userGetPrisma";
 import userViewer from "../../view/userViewer";
 
 /**
- * User controller that gets the current user based on the JWT given.
+ * Users controller that gets the current user based on the JWT given.
  * @param req Request with an authenticated user on the auth property.
  * @param res Response
  * @param next NextFunction
  * @returns void
  */
-export default async function userGet(
+export default async function usersGet(
   req: Request,
   res: Response,
   next: NextFunction

@@ -12,7 +12,6 @@ import queuesRouter from "./routes/api/queues";
 import reviewsRouter from "./routes/api/reviews";
 import shopsRouter from "./routes/api/shops";
 import tagsRouter from "./routes/api/tags";
-import userRouter from "./routes/api/user";
 import usersRouter from "./routes/api/users";
 
 const app = express();
@@ -21,8 +20,6 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/users", usersRouter);
-
-app.use("/api/user", userRouter);
 
 app.use("/api/profiles", profilesRouter);
 
