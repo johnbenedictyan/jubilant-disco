@@ -67,17 +67,56 @@ describe("Authenticated Shop Endpoints", () => {
     await deleteTestShop(res.body.shop.id);
   });
 
+  it("PUT /shop should update test shop", async () => {
+    const updateShopPayload = {
+      shop: {
+        name: `NEW ${TEST_SHOP.name}`,
+        addressField1: `NEW ${TEST_SHOP.addressField1}`,
+        addressField2: `NEW ${TEST_SHOP.addressField2}`,
+        addressField3: `NEW ${TEST_SHOP.addressField3}`,
+        postalCode: `NEW ${TEST_SHOP.postalCode}`,
+        image: TEST_SHOP.image,
+        rating: TEST_SHOP.rating,
+        visible: TEST_SHOP.visible,
+      },
+    };
+
+    const shop = await createTestShop();
+    const res = await requestWithSupertest
+      .put(`/api/shops/${shop.id}`)
+      .send(updateShopPayload)
+      .set("Content-Type", "application/json")
+      .set("Authorization", `Token ${authToken}`);
+
+    expect(res.status).toEqual(200);
+    expect(res.type).toEqual(expect.stringContaining("json"));
+    expect(res.body).toHaveProperty("shop");
+    expect(res.body.shop.name).toEqual(`NEW ${TEST_SHOP.name}`);
+    expect(res.body.shop.addressField1).toEqual(
+      `NEW ${TEST_SHOP.addressField1}`
+    );
+    expect(res.body.shop.addressField2).toEqual(
+      `NEW ${TEST_SHOP.addressField2}`
+    );
+    expect(res.body.shop.addressField3).toEqual(
+      `NEW ${TEST_SHOP.addressField3}`
+    );
+    expect(res.body.shop.postalCode).toEqual(`NEW ${TEST_SHOP.postalCode}`);
+
+    await deleteTestShop(res.body.shop.id);
+  });
+
   it("DELETE /shop should delete test shop", async () => {
     const shop = await createTestShop();
 
-    const deleteRes = await requestWithSupertest
+    const res = await requestWithSupertest
       .delete(`/api/shops/${shop.id}`)
       .set("Content-Type", "application/json")
       .set("Authorization", `Token ${authToken}`);
 
-    expect(deleteRes.status).toEqual(200);
-    expect(deleteRes.type).toEqual(expect.stringContaining("json"));
-    expect(deleteRes.body).toHaveProperty("shop");
+    expect(res.status).toEqual(200);
+    expect(res.type).toEqual(expect.stringContaining("json"));
+    expect(res.body).toHaveProperty("shop");
   });
 
   afterAll(async () => {
