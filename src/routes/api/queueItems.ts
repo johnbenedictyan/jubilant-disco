@@ -6,6 +6,12 @@ const router = Router();
 
 router.get("/", auth.optionalAuthenticate, queueItems.queueItemsList);
 
+router.get(
+  "/:queueHash/:userUsername/joined",
+  auth.optionalAuthenticate,
+  queueItems.queueItemsJoined
+);
+
 router.get("/:id", auth.optionalAuthenticate, queueItems.queueItemsGet);
 
 router.post("/", auth.authenticate, queueItems.queueItemsCreate);
