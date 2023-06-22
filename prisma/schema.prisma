@@ -58,7 +58,7 @@ model Shop {
     queueList     Queue[]
     favoritedBy   User[]         @relation("FavoriteShops")
     anyQueueList  AnyQueueItem[]
-    visible      Boolean        @default(true)
+    visible       Boolean        @default(true)
 }
 
 model Queue {
@@ -67,26 +67,24 @@ model Queue {
     Shop          Shop        @relation(fields: [shopId], references: [id])
     shopId        Int
     queueItemList QueueItem[]
-    visible      Boolean     @default(true)
+    visible       Boolean     @default(true)
 }
 
 model QueueItem {
+    id           Int      @id @default(autoincrement())
     User         User     @relation(fields: [userUsername], references: [username])
     userUsername String
     Queue        Queue    @relation(fields: [queueHash], references: [hash])
     queueHash    String
     insert_date  DateTime @default(now())
     valid        Boolean  @default(true)
-
-    @@id([queueHash, userUsername])
 }
 
 model AnyQueueItem {
+    id           Int      @id @default(autoincrement())
     User         User     @relation(fields: [userUsername], references: [username])
     userUsername String
     Shop         Shop     @relation(fields: [shopId], references: [id])
     shopId       Int
     insert_date  DateTime @default(now())
-
-    @@id([shopId, userUsername])
 }
