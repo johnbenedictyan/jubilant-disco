@@ -33,7 +33,10 @@ describe("Authenticated Shop Endpoints", () => {
   });
 
   it("GET /shop should show all shops", async () => {
-    const res = await requestWithSupertest.get("/api/shops");
+    const res = await requestWithSupertest
+      .get("/api/shops")
+      .set("Content-Type", "application/json")
+      .set("Authorization", `Token ${authToken}`);
 
     expect(res.status).toEqual(200);
     expect(res.type).toEqual(expect.stringContaining("json"));
@@ -122,4 +125,71 @@ describe("Authenticated Shop Endpoints", () => {
   afterAll(async () => {
     await deleteTestUser();
   });
+});
+
+describe("Unauthenticated Shop Endpoints", () => {
+  beforeAll(async () => {});
+
+  it("GET /shop should not show all shops", async () => {
+    const res = await requestWithSupertest.get("/api/shops");
+
+    expect(res.status).toEqual(401);
+  });
+
+  it("POST /shop should not create test shop", async () => {
+    const createShopPayload = {
+      shop: {
+        name: TEST_SHOP.name,
+        addressField1: TEST_SHOP.addressField1,
+        addressField2: TEST_SHOP.addressField2,
+        addressField3: TEST_SHOP.addressField3,
+        postalCode: TEST_SHOP.postalCode,
+        image: TEST_SHOP.image,
+        rating: TEST_SHOP.rating,
+        visible: TEST_SHOP.visible,
+      },
+    };
+
+    const res = await requestWithSupertest
+      .post("/api/shops")
+      .set("Content-Type", "application/json")
+      .send(createShopPayload);
+
+    expect(res.status).toEqual(401);
+  });
+
+  it("PUT /shop should not update test shop", async () => {
+    const updateShopPayload = {
+      shop: {
+        name: `NEW ${TEST_SHOP.name}`,
+        addressField1: `NEW ${TEST_SHOP.addressField1}`,
+        addressField2: `NEW ${TEST_SHOP.addressField2}`,
+        addressField3: `NEW ${TEST_SHOP.addressField3}`,
+        postalCode: `NEW ${TEST_SHOP.postalCode}`,
+        image: TEST_SHOP.image,
+        rating: TEST_SHOP.rating,
+        visible: TEST_SHOP.visible,
+      },
+    };
+
+    const shop = await createTestShop();
+    const res = await requestWithSupertest
+      .put(`/api/shops/${shop.id}`)
+      .send(updateShopPayload)
+      .set("Content-Type", "application/json");
+
+    expect(res.status).toEqual(401);
+  });
+
+  it("DELETE /shop should not delete test shop", async () => {
+    const shop = await createTestShop();
+
+    const res = await requestWithSupertest
+      .delete(`/api/shops/${shop.id}`)
+      .set("Content-Type", "application/json");
+
+    expect(res.status).toEqual(401);
+  });
+
+  afterAll(async () => {});
 });
