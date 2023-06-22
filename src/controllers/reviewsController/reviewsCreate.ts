@@ -3,7 +3,7 @@ import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import reviewCreatePrisma from "../../utils/db/review/reviewCreatePrisma";
 import tagsCreatePrisma from "../../utils/db/tag/tagsCreatePrisma";
-import userGetPrisma from "../../utils/db/user/userGetPrisma";
+import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import reviewViewer from "../../view/reviewViewer";
 
 interface Review {

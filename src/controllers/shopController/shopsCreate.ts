@@ -1,11 +1,11 @@
-import { Tag } from '@prisma/client';
-import { NextFunction, Response } from 'express';
-import { Request } from 'express-jwt';
+import { Tag } from "@prisma/client";
+import { NextFunction, Response } from "express";
+import { Request } from "express-jwt";
 
-import shopCreatePrisma from '../../utils/db/shop/shopCreatePrisma';
-import tagsCreatePrisma from '../../utils/db/tag/tagsCreatePrisma';
-import userGetPrisma from '../../utils/db/user/userGetPrisma';
-import shopViewer from '../../view/shopViewer';
+import shopCreatePrisma from "../../utils/db/shop/shopCreatePrisma";
+import tagsCreatePrisma from "../../utils/db/tag/tagsCreatePrisma";
+import userGetPrisma from "../../utils/db/users/usersGetPrisma";
+import shopViewer from "../../view/shopViewer";
 
 interface Shop {
   name: string;

@@ -2,7 +2,7 @@ import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import { ParsedQs } from "qs";
 import reviewsListPrisma from "../../utils/db/review/reviewListPrisma";
-import userGetPrisma from "../../utils/db/user/userGetPrisma";
+import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import reviewViewer from "../../view/reviewViewer";
 
 function parseReviewListQuery(query: ParsedQs) {

@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import anyQueueItemCreatePrisma from "../../utils/db/anyQueueItem/anyQueueItemCreatePrisma";
-import userGetPrisma from "../../utils/db/user/userGetPrisma";
+import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import anyQueueItemViewer from "../../view/anyQueueItemViewer";
 
 interface anyQueueItem {
@@ -22,8 +22,7 @@ export default async function anyQueueItemsCreate(
   res: Response,
   next: NextFunction
 ) {
-  const { userUsername, shopId }: anyQueueItem =
-    req.body.anyQueueItem;
+  const { userUsername, shopId }: anyQueueItem = req.body.anyQueueItem;
   const userName = req.auth?.user?.username;
 
   try {

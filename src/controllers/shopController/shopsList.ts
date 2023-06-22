@@ -2,7 +2,7 @@ import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import { ParsedQs } from "qs";
 import shopsListPrisma from "../../utils/db/shop/shopListPrisma";
-import userGetPrisma from "../../utils/db/user/userGetPrisma";
+import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import shopViewer from "../../view/shopViewer";
 
 function parseShopListQuery(query: ParsedQs) {

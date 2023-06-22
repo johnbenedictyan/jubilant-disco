@@ -1,15 +1,18 @@
 import { Router } from "express";
 
 import {
-  usersGet,
-  usersLogin,
-  usersRegister,
-  usersUpdate,
+    usersGet,
+    usersList,
+    usersLogin,
+    usersRegister,
+    usersUpdate,
 } from "../../controllers/usersController";
 import * as auth from "../../middleware/auth/authenticator";
 import * as validator from "../../middleware/userValidator";
 
 const router = Router();
+
+router.get("/", usersList);
 
 router.get("/profile", usersGet);
 

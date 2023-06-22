@@ -1,4 +1,4 @@
-import prisma from '../prisma';
+import prisma from "../prisma";
 
 export default async function shopDeletePrisma(id: number) {
   const shop = await prisma.shop.delete({

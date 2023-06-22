@@ -3,7 +3,7 @@ import { Request } from 'express-jwt';
 
 import shopGetPrisma from '../../utils/db/shop/shopGetPrisma';
 import shopUpdatePrisma from '../../utils/db/shop/shopUpdatePrisma';
-import userGetPrisma from '../../utils/db/user/userGetPrisma';
+import userGetPrisma from '../../utils/db/users/usersGetPrisma';
 import shopViewer from '../../view/shopViewer';
 
 /**

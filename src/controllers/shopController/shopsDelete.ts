@@ -2,7 +2,7 @@ import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import shopDeletePrisma from "../../utils/db/shop/shopDeletePrisma";
 import shopGetPrisma from "../../utils/db/shop/shopGetPrisma";
-import userGetPrisma from "../../utils/db/user/userGetPrisma";
+import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import shopViewer from "../../view/shopViewer";
 
 /**

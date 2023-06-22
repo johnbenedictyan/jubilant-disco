@@ -2,7 +2,7 @@ import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import { ParsedQs } from "qs";
 import queueItemsListPrisma from "../../utils/db/queueItem/queueItemListPrisma";
-import userGetPrisma from "../../utils/db/user/userGetPrisma";
+import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import queueItemViewer from "../../view/queueItemViewer";
 
 function parseQueueItemListQuery(query: ParsedQs) {

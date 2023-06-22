@@ -1,10 +1,4 @@
-import {
-    AnyQueueItem,
-    Queue,
-    Shop,
-    Tag,
-    User
-} from "@prisma/client";
+import { AnyQueueItem, Queue, Shop, Tag, User } from "@prisma/client";
 
 type FullShop = Shop & {
   tagList: Tag[];
@@ -41,7 +35,7 @@ export default function shopViewer(
     favorited: favorited,
     favoritesCount: shop._count.favoritedBy,
     queueItemCount: shop._count.anyQueueList,
-    visible: shop.visible
+    visible: shop.visible,
   };
   return shopView;
 }

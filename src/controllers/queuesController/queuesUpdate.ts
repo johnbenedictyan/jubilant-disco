@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import queueUpdatePrisma from "../../utils/db/queue/queueUpdatePrisma";
-import userGetPrisma from "../../utils/db/user/userGetPrisma";
+import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import queueViewer from "../../view/queueViewer";
 
 /**

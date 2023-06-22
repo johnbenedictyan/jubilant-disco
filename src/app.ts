@@ -1,8 +1,8 @@
 import express from "express";
 
 import {
-    authErrorHandler,
-    prismaErrorHandler,
+  authErrorHandler,
+  prismaErrorHandler,
 } from "./middleware/errorHandling";
 import generalErrorHandler from "./middleware/errorHandling/generalErrorHandler";
 import anyQueueItemsRouter from "./routes/api/anyQueueItems";

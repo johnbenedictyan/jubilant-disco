@@ -8,7 +8,7 @@ interface RequiredFields {
 export default async function anyQueueItemDeletePrisma(info: RequiredFields) {
   const anyQueueItem = await prisma.anyQueueItem.delete({
     where: {
-        shopId_userUsername: {
+      shopId_userUsername: {
         ...info,
       },
     },

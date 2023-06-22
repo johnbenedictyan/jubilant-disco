@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as reviews from "../../controllers/reviewsController";
-import * as validator from "../../middleware/reviewsValidator";
 import * as auth from "../../middleware/auth/authenticator";
+import * as validator from "../../middleware/reviewsValidator";
 
 const router = Router();
 

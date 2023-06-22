@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import reviewGetPrisma from "../../utils/db/review/reviewGetPrisma";
-import userGetPrisma from "../../utils/db/user/userGetPrisma";
+import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import reviewViewer from "../../view/reviewViewer";
 
 /**

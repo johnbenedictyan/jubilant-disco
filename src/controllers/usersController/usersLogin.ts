@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import createUserToken from "../../utils/auth/createUserToken";
-import userGetEmailPrisma from "../../utils/db/user/userGetEmailPrisma";
+import userGetEmailPrisma from "../../utils/db/users/usersGetEmailPrisma";
 import { compareWithHash } from "../../utils/hashPasswords";
 import userViewer from "../../view/userViewer";
 
