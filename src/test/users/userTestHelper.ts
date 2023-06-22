@@ -30,3 +30,8 @@ const deleteTestUser = async () => {
   });
   return testUser;
 };
+
+export {
+    TEST_USER, createTestUser,
+    deleteTestUser
+};

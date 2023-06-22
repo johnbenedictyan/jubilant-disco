@@ -14,3 +14,17 @@ const createTestTag = async () => {
   });
   return testTag;
 };
+
+const deleteTestTag = async () => {
+  const testTag = await prisma.tag.delete({
+    where: {
+      ...TEST_TAG,
+    },
+  });
+  return testTag;
+};
+
+export {
+    TEST_TAG, createTestTag,
+    deleteTestTag
+};

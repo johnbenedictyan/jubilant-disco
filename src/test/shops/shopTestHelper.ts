@@ -38,3 +38,8 @@ const deleteTestShop = async (shop: Shop) => {
   });
   return testShop;
 };
+
+export {
+    TEST_SHOP, createTestShop,
+    deleteTestShop
+};

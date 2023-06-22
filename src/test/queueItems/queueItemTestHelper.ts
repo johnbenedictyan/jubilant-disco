@@ -31,3 +31,8 @@ const deleteTestQueueItem = async (testUser: User, testQueue: Queue) => {
   });
   return testQueueItem;
 };
+
+export {
+    createTestQueueItem,
+    deleteTestQueueItem
+};

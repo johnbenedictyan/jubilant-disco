@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
-import { expressjwt as jwt, Request as JWTRequest } from "express-jwt";
+import { Request as JWTRequest, expressjwt as jwt } from "express-jwt";
 
 dotenv.config();
 

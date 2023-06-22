@@ -33,3 +33,8 @@ const deleteTestQueue = async (queue: Queue) => {
   });
   return testQueue;
 };
+
+export {
+    TEST_QUEUE, createTestQueue,
+    deleteTestQueue
+};
