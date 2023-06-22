@@ -6,7 +6,7 @@ import {
   deleteTestUser,
   TEST_USER,
 } from "../users/userTestHelper";
-import { deleteTestShop, TEST_SHOP } from "./shopTestHelper";
+import { createTestShop, deleteTestShop, TEST_SHOP } from "./shopTestHelper";
 
 const requestWithSupertest = supertest(app);
 
@@ -67,8 +67,20 @@ describe("Authenticated Shop Endpoints", () => {
     await deleteTestShop(res.body.shop.id);
   });
 
+  it("DELETE /shop should delete test shop", async () => {
+    const shop = await createTestShop();
+
+    const deleteRes = await requestWithSupertest
+      .delete(`/api/shops/${shop.id}`)
+      .set("Content-Type", "application/json")
+      .set("Authorization", `Token ${authToken}`);
+
+    expect(deleteRes.status).toEqual(200);
+    expect(deleteRes.type).toEqual(expect.stringContaining("json"));
+    expect(deleteRes.body).toHaveProperty("shop");
+  });
+
   afterAll(async () => {
     await deleteTestUser();
-
   });
 });
