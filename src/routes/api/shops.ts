@@ -8,7 +8,7 @@ const router = Router();
 
 router.get(
   "/",
-  auth.authenticate,
+  auth.optionalAuthenticate,
   validator.shopsListValidator,
   shops.shopsList
 );
