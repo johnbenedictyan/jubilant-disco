@@ -12,6 +12,7 @@ export default function queueViewer(queue: FullQueue, currentUser?: User) {
     shopId: queue.shopId,
     queueItemList: queue.queueItemList,
     queueItemCount: queue._count.queueItemList,
+    visible: queue.visible
   };
   return queueView;
 }

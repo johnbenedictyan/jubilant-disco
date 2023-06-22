@@ -58,6 +58,7 @@ model Shop {
     queueList     Queue[]
     favoritedBy   User[]         @relation("FavoriteShops")
     anyQueueList  AnyQueueItem[]
+    visible      Boolean        @default(true)
 }
 
 model Queue {
@@ -66,6 +67,7 @@ model Queue {
     Shop          Shop        @relation(fields: [shopId], references: [id])
     shopId        Int
     queueItemList QueueItem[]
+    visible      Boolean     @default(true)
 }
 
 model QueueItem {
