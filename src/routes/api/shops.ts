@@ -13,6 +13,8 @@ router.get(
   shops.shopsList
 );
 
+router.get("/code/:code", auth.optionalAuthenticate, shops.shopsGetFromCode);
+
 router.get("/:id", auth.optionalAuthenticate, shops.shopsGet);
 
 router.post(

@@ -59,7 +59,7 @@ model Shop {
     favoritedBy   User[]         @relation("FavoriteShops")
     anyQueueList  AnyQueueItem[]
     visible       Boolean        @default(true)
-    code          String
+    code          String         @unique
 }
 
 model Queue {
