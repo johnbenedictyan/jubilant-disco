@@ -12,6 +12,12 @@ router.get(
   queues.queuesList
 );
 
+router.get(
+  "/:shopId/shortest",
+  auth.optionalAuthenticate,
+  queues.queuesGetShortest
+);
+
 router.get("/:queueHash", auth.optionalAuthenticate, queues.queuesGet);
 
 router.post(
