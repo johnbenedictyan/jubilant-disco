@@ -1,8 +1,8 @@
 import prisma from "../prisma";
 
-export default async function queueGetPrisma(hash: string) {
+export default async function queueGetPrisma(id: number) {
   const queue = await prisma.queue.findUnique({
-    where: { hash },
+    where: { id },
     include: {
       queueItemList: {
         orderBy: {

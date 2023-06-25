@@ -7,7 +7,7 @@ type FullQueue = Queue & {
 
 export default function queueViewer(queue: FullQueue, currentUser?: User) {
   const queueView = {
-    hash: queue.hash,
+    id: queue.id,
     name: queue.name,
     shopId: queue.shopId,
     queueItemList: queue.queueItemList,

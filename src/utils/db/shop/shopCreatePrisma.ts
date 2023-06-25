@@ -8,6 +8,7 @@ interface RequiredFields {
   addressField2: string;
   addressField3: string;
   postalCode: string;
+  code: string;
 }
 
 export default async function shopCreatePrisma(

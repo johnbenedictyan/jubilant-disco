@@ -54,6 +54,7 @@ describe("Authenticated Shop Endpoints", () => {
         image: TEST_SHOP.image,
         rating: TEST_SHOP.rating,
         visible: TEST_SHOP.visible,
+        code: TEST_SHOP.code,
       },
     };
 
@@ -81,6 +82,7 @@ describe("Authenticated Shop Endpoints", () => {
         image: TEST_SHOP.image,
         rating: TEST_SHOP.rating,
         visible: TEST_SHOP.visible,
+        code: `5${TEST_SHOP.code}`
       },
     };
 
@@ -149,6 +151,7 @@ describe("Unauthenticated Shop Endpoints", () => {
         image: TEST_SHOP.image,
         rating: TEST_SHOP.rating,
         visible: TEST_SHOP.visible,
+        code: TEST_SHOP.code
       },
     };
 
@@ -171,6 +174,7 @@ describe("Unauthenticated Shop Endpoints", () => {
         image: TEST_SHOP.image,
         rating: TEST_SHOP.rating,
         visible: TEST_SHOP.visible,
+        code: TEST_SHOP.code,
       },
     };
 

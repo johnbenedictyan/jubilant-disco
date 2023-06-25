@@ -7,7 +7,7 @@ import queueGetShortestPrisma from "../../utils/db/queue/queueGetShortestPrisma"
 
 /**
  * Queue controller that must receive a request.
- * The parameters of the request must have a queueHash.
+ * The parameters of the request must have a queueId.
  * @param req Request with a an optional jwt token verified
  * @param res Response
  * @param next NextFunction

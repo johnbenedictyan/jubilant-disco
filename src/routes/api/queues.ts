@@ -18,7 +18,7 @@ router.get(
   queues.queuesGetShortest
 );
 
-router.get("/:queueHash", auth.optionalAuthenticate, queues.queuesGet);
+router.get("/:queueId", auth.optionalAuthenticate, queues.queuesGet);
 
 router.post(
   "/",
@@ -28,12 +28,12 @@ router.post(
 );
 
 router.put(
-  "/:queueHash",
+  "/:queueId",
   auth.authenticate,
   validator.queuesUpdateValidator,
   queues.queuesUpdate
 );
 
-router.delete("/:queueHash", auth.authenticate, queues.queuesDelete);
+router.delete("/:queueId", auth.authenticate, queues.queuesDelete);
 
 export default router;

@@ -1,9 +1,9 @@
-import { Queue, Shop } from '@prisma/client';
+import { Queue, Shop } from "@prisma/client";
 
-import prisma from '../../utils/db/prisma';
+import prisma from "../../utils/db/prisma";
 
 const TEST_QUEUE: Queue = {
-  hash: "123abc",
+  id: 99,
   name: "Test Queue",
   shopId: 0,
   visible: true,
@@ -12,7 +12,6 @@ const TEST_QUEUE: Queue = {
 const createTestQueue = async (testShop: Shop) => {
   const testQueue = await prisma.queue.create({
     data: {
-      hash: TEST_QUEUE.hash,
       name: TEST_QUEUE.name,
       Shop: {
         connect: {
@@ -28,13 +27,10 @@ const createTestQueue = async (testShop: Shop) => {
 const deleteTestQueue = async (queue: Queue) => {
   const testQueue = await prisma.queue.delete({
     where: {
-      hash: TEST_QUEUE.hash,
+      id: queue.id,
     },
   });
   return testQueue;
 };
 
-export {
-    TEST_QUEUE, createTestQueue,
-    deleteTestQueue
-};
+export { TEST_QUEUE, createTestQueue, deleteTestQueue };

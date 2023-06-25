@@ -13,6 +13,7 @@ interface Shop {
   addressField2: string;
   addressField3: string;
   postalCode: string;
+  code: string;
   tagList?: Array<string>;
 }
 
@@ -36,6 +37,7 @@ export default async function shopsCreate(
     addressField3,
     postalCode,
     tagList,
+    code,
   }: Shop = req.body.shop;
   const userName = req.auth?.user?.username;
 
@@ -58,6 +60,7 @@ export default async function shopsCreate(
         addressField2,
         addressField3,
         postalCode,
+        code,
       },
       tags
     );

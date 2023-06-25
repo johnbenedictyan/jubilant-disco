@@ -6,7 +6,7 @@ import queueViewer from "../../view/queueViewer";
 
 /**
  * Queue controller that must receive a request with an authenticated user.
- * The parameters of the request must have a queueHash.
+ * The parameters of the request must have a queueId.
  * The body of the request must have an queue object with title, description and body.
  * @param req Request with a jwt token verified
  * @param res Response
@@ -18,7 +18,7 @@ export default async function queuesUpdate(
   res: Response,
   next: NextFunction
 ) {
-  const queueHash = req.params.queueHash;
+  const queueId = parseInt(req.params.queueId);
   const { name } = req.body.queue;
   const userName = req.auth?.user?.username;
 
@@ -28,7 +28,7 @@ export default async function queuesUpdate(
     if (!currentUser) return res.sendStatus(401);
 
     // Update the queue
-    const queue = await queueUpdatePrisma(queueHash, {
+    const queue = await queueUpdatePrisma(queueId, {
       name,
     });
 

@@ -5,11 +5,11 @@ interface UpdateFields {
 }
 
 export default async function queueUpdatePrisma(
-  hash: string,
+  id: number,
   info: UpdateFields
 ) {
   const queue = await prisma.queue.update({
-    where: { hash },
+    where: { id },
     data: {
       ...info,
     },

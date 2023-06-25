@@ -6,7 +6,7 @@ import queueViewer from "../../view/queueViewer";
 
 /**
  * Queue controller that must receive a request.
- * The parameters of the request must have a queueHash.
+ * The parameters of the request must have a queueId.
  * @param req Request with a an optional jwt token verified
  * @param res Response
  * @param next NextFunction
@@ -17,7 +17,7 @@ export default async function queuesGet(
   res: Response,
   next: NextFunction
 ) {
-  const queueHash = req.params.queueHash;
+  const queueId = parseInt(req.params.queueId);
   const username = req.auth?.user?.username;
 
   try {
@@ -25,7 +25,7 @@ export default async function queuesGet(
     const currentUser = await userGetPrisma(username);
 
     // Get the queue
-    const queue = await queueGetPrisma(queueHash);
+    const queue = await queueGetPrisma(queueId);
     if (!queue) return res.sendStatus(404);
 
     // Create the queue view

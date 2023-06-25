@@ -7,7 +7,7 @@ const router = Router();
 router.get("/", auth.optionalAuthenticate, queueItems.queueItemsList);
 
 router.get(
-  "/:queueHash/:userUsername/joined",
+  "/:queueId/:userUsername/joined",
   auth.optionalAuthenticate,
   queueItems.queueItemsJoined
 );

@@ -5,7 +5,7 @@ import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import queueViewer from "../../view/queueViewer";
 
 interface queue {
-  queueHash: string;
+  queueId: number;
   name: string;
   shopId: number;
 }
@@ -23,7 +23,7 @@ export default async function queuesCreate(
   res: Response,
   next: NextFunction
 ) {
-  const { queueHash, name, shopId }: queue = req.body.queue;
+  const { queueId, name, shopId }: queue = req.body.queue;
   const userName = req.auth?.user?.username;
 
   try {
@@ -32,7 +32,7 @@ export default async function queuesCreate(
     if (!currentUser) return res.sendStatus(401);
 
     // Create the queue
-    const queue = await queueCreatePrisma({ hash: queueHash, name, shopId });
+    const queue = await queueCreatePrisma({ id: queueId, name, shopId });
 
     // Create queue view
     const queueView = queueViewer(queue, currentUser);

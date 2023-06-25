@@ -59,10 +59,11 @@ model Shop {
     favoritedBy   User[]         @relation("FavoriteShops")
     anyQueueList  AnyQueueItem[]
     visible       Boolean        @default(true)
+    code          String
 }
 
 model Queue {
-    hash          String      @id
+    id            Int         @id @default(autoincrement())
     name          String
     Shop          Shop        @relation(fields: [shopId], references: [id])
     shopId        Int
@@ -74,8 +75,8 @@ model QueueItem {
     id           Int      @id @default(autoincrement())
     User         User     @relation(fields: [userUsername], references: [username])
     userUsername String
-    Queue        Queue    @relation(fields: [queueHash], references: [hash])
-    queueHash    String
+    Queue        Queue    @relation(fields: [queueId], references: [id])
+    queueId      Int
     insert_date  DateTime @default(now())
     valid        Boolean  @default(true)
 }

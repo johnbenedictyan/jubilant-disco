@@ -12,7 +12,7 @@ const createTestQueueItem = async (testUser: User, testQueue: Queue) => {
       },
       Queue: {
         connect: {
-          hash: testQueue.hash,
+          id: testQueue.id,
         },
       },
     },

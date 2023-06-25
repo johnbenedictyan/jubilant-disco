@@ -1,7 +1,7 @@
 import prisma from "../prisma";
 
 interface RequiredFields {
-  hash: string;
+  id: number;
   name: string;
   shopId: number;
 }
