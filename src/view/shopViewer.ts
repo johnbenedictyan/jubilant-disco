@@ -36,6 +36,7 @@ export default function shopViewer(
     favoritesCount: shop._count.favoritedBy,
     queueItemCount: shop._count.anyQueueList,
     visible: shop.visible,
+    code: shop.code
   };
   return shopView;
 }
