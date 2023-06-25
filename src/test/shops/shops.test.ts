@@ -2,9 +2,9 @@ import supertest from "supertest";
 
 import app from "../../app";
 import {
-  createTestUser,
-  deleteTestUser,
-  TEST_USER,
+    createTestUser,
+    deleteTestUser,
+    TEST_USER,
 } from "../users/userTestHelper";
 import { createTestShop, deleteTestShop, TEST_SHOP } from "./shopTestHelper";
 

@@ -24,7 +24,4 @@ const deleteTestTag = async () => {
   return testTag;
 };
 
-export {
-    TEST_TAG, createTestTag,
-    deleteTestTag
-};
+export { TEST_TAG, createTestTag, deleteTestTag };

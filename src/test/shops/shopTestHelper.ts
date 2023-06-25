@@ -1,6 +1,6 @@
-import { Shop } from '@prisma/client';
+import { Shop } from "@prisma/client";
 
-import prisma from '../../utils/db/prisma';
+import prisma from "../../utils/db/prisma";
 
 const TEST_SHOP: Shop = {
   id: 0,
@@ -12,7 +12,7 @@ const TEST_SHOP: Shop = {
   image: "https://picsum.photos/400",
   rating: 24,
   visible: true,
-  code: "SH4YF"
+  code: "SH4YF",
 };
 
 const createTestShop = async () => {
@@ -41,7 +41,4 @@ const deleteTestShop = async (shopId: number) => {
   return testShop;
 };
 
-export {
-    TEST_SHOP, createTestShop,
-    deleteTestShop
-};
+export { TEST_SHOP, createTestShop, deleteTestShop };

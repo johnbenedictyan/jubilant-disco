@@ -13,7 +13,7 @@ router.get(
 );
 
 router.get(
-  "/:shopId/shortest",
+  "/shop/:shopId/shortest",
   auth.optionalAuthenticate,
   queues.queuesGetShortest
 );

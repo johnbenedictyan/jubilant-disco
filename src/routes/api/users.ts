@@ -1,11 +1,11 @@
 import { Router } from "express";
 
 import {
-    usersGet,
-    usersList,
-    usersLogin,
-    usersRegister,
-    usersUpdate,
+  usersGet,
+  usersList,
+  usersLogin,
+  usersRegister,
+  usersUpdate,
 } from "../../controllers/usersController";
 import * as auth from "../../middleware/auth/authenticator";
 import * as validator from "../../middleware/userValidator";

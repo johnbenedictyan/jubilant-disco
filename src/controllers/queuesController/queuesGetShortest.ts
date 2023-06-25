@@ -1,9 +1,8 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
-import queueGetPrisma from "../../utils/db/queue/queueGetPrisma";
+import queueGetShortestPrisma from "../../utils/db/queue/queueGetShortestPrisma";
 import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import queueViewer from "../../view/queueViewer";
-import queueGetShortestPrisma from "../../utils/db/queue/queueGetShortestPrisma";
 
 /**
  * Queue controller that must receive a request.
