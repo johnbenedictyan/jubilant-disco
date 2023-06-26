@@ -31,8 +31,8 @@ export default async function queueItemsCreate(
 
   try {
     // Get current user
-    const currentUser = await userGetPrisma(userName);
-    if (!currentUser) return res.sendStatus(401);
+    // const currentUser = await userGetPrisma(userName);
+    // if (!currentUser) return res.sendStatus(401);
 
     // Create the queueItem
     const queueItem = await queueItemCreatePrisma({
@@ -44,7 +44,7 @@ export default async function queueItemsCreate(
     });
 
     // Create queueItem view
-    const queueItemView = queueItemViewer(queueItem, currentUser);
+    const queueItemView = queueItemViewer(queueItem);
     return res.status(201).json({ queueItem: queueItemView });
   } catch (error) {
     return next(error);
