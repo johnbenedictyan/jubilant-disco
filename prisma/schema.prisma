@@ -22,7 +22,6 @@ model User {
     likes         Review[]       @relation("Likes") /// List of reviews this user has liked.
     favoriteShops Shop[]         @relation("FavoriteShops") // List of shops this user hs favorited.
     role          String         @default("user")
-    inQueueFor    QueueItem[]
     AnyQueueItem  AnyQueueItem[]
 }
 
@@ -73,8 +72,6 @@ model Queue {
 
 model QueueItem {
     id           Int      @id @default(autoincrement())
-    User         User     @relation(fields: [userUsername], references: [username])
-    userUsername String
     Queue        Queue    @relation(fields: [queueId], references: [id])
     queueId      Int
     insert_date  DateTime @default(now())
