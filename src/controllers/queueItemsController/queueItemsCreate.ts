@@ -9,6 +9,7 @@ interface queueItem {
   queueId: number;
   name: string;
   phoneNumber: string;
+  uuid: string;
 }
 
 /**
@@ -24,7 +25,7 @@ export default async function queueItemsCreate(
   res: Response,
   next: NextFunction
 ) {
-  const { userUsername, queueId, name, phoneNumber }: queueItem =
+  const { userUsername, queueId, name, phoneNumber, uuid }: queueItem =
     req.body.queueItem;
   const userName = req.auth?.user?.username;
 
@@ -39,6 +40,7 @@ export default async function queueItemsCreate(
       queueId,
       name,
       phoneNumber,
+      uuid,
     });
 
     // Create queueItem view

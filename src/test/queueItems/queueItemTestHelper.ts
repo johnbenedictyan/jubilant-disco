@@ -5,11 +5,6 @@ import prisma from "../../utils/db/prisma";
 const createTestQueueItem = async (testUser: User, testQueue: Queue) => {
   const testQueueItem = await prisma.queueItem.create({
     data: {
-      User: {
-        connect: {
-          username: testUser.username,
-        },
-      },
       Queue: {
         connect: {
           id: testQueue.id,

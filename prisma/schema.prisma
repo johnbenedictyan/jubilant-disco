@@ -71,13 +71,14 @@ model Queue {
 }
 
 model QueueItem {
-    id           Int      @id @default(autoincrement())
-    Queue        Queue    @relation(fields: [queueId], references: [id])
-    queueId      Int
-    insert_date  DateTime @default(now())
-    name         String?
-    phoneNumber  String?
-    valid        Boolean  @default(true)
+    id          Int      @id @default(autoincrement())
+    Queue       Queue    @relation(fields: [queueId], references: [id])
+    queueId     Int
+    insert_date DateTime @default(now())
+    name        String?
+    phoneNumber String?
+    uuid        String?
+    valid       Boolean  @default(true)
 }
 
 model AnyQueueItem {

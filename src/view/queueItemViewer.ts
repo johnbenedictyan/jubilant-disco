@@ -6,12 +6,12 @@ export default function queueItemViewer(
 ) {
   const queueItemView = {
     id: queueItem.id,
-    userUsername: queueItem.userUsername,
     queueId: queueItem.queueId,
     name: queueItem.name,
     phoneNumber: queueItem.phoneNumber,
     insertDate: queueItem.insert_date,
     valid: queueItem.valid,
+    uuid: queueItem.uuid
   };
   return queueItemView;
 }

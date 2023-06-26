@@ -5,6 +5,7 @@ interface RequiredFields {
   userUsername: string;
   name: string;
   phoneNumber: string;
+  uuid: string;
 }
 
 export default async function queueItemCreatePrisma(info: RequiredFields) {

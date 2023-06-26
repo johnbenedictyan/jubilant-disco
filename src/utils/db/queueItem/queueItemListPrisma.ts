@@ -2,13 +2,13 @@ import prisma from "../prisma";
 
 export default async function queueItemsListPrisma(
   queueId?: number,
-  userUsername?: string,
+  uuid?: string,
   valid?: boolean
 ) {
   const queueItems = await prisma.queueItem.findMany({
     where: {
       queueId,
-      userUsername,
+      uuid,
       valid,
     },
     orderBy: { insert_date: "asc" },
