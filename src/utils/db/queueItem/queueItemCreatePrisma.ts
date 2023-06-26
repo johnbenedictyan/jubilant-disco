@@ -3,6 +3,8 @@ import prisma from "../prisma";
 interface RequiredFields {
   queueId: number;
   userUsername: string;
+  name: string;
+  phoneNumber: string;
 }
 
 export default async function queueItemCreatePrisma(info: RequiredFields) {

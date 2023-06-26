@@ -78,6 +78,8 @@ model QueueItem {
     Queue        Queue    @relation(fields: [queueId], references: [id])
     queueId      Int
     insert_date  DateTime @default(now())
+    name         String?
+    phoneNumber  String?
     valid        Boolean  @default(true)
 }
 

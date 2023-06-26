@@ -2,6 +2,8 @@ import prisma from "../prisma";
 
 interface UpdateFields {
   valid: boolean;
+  name: string;
+  phoneNumber: string;
 }
 
 export default async function queueItemUpdatePrisma(

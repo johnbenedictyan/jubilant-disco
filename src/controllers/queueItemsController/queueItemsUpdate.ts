@@ -20,7 +20,7 @@ export default async function queueItemsUpdate(
 ) {
   const id = parseInt(req.params.id as string);
 
-  const { valid } = req.body.queueItem;
+  const { valid, name, phoneNumber } = req.body.queueItem;
   const userName = req.auth?.user?.username;
 
   try {
@@ -31,6 +31,8 @@ export default async function queueItemsUpdate(
     // Update the queueItem
     const queueItem = await queueItemUpdatePrisma(id, {
       valid,
+      name,
+      phoneNumber,
     });
 
     // Create the queueItem view

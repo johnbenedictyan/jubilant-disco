@@ -7,6 +7,8 @@ import queueItemViewer from "../../view/queueItemViewer";
 interface queueItem {
   userUsername: string;
   queueId: number;
+  name: string;
+  phoneNumber: string;
 }
 
 /**
@@ -22,7 +24,7 @@ export default async function queueItemsCreate(
   res: Response,
   next: NextFunction
 ) {
-  const { userUsername, queueId }: queueItem =
+  const { userUsername, queueId, name, phoneNumber }: queueItem =
     req.body.queueItem;
   const userName = req.auth?.user?.username;
 
@@ -35,6 +37,8 @@ export default async function queueItemsCreate(
     const queueItem = await queueItemCreatePrisma({
       userUsername,
       queueId,
+      name,
+      phoneNumber,
     });
 
     // Create queueItem view
