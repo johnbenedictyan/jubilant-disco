@@ -36,7 +36,7 @@ export default async function queueItemsJoined(
     const currentUser = await userGetPrisma(username);
 
     // Get the queueItems
-    const queueItems = await queueItemsListPrisma(queueId, uuid);
+    const queueItems = await queueItemsListPrisma(queueId, uuid, true);
 
     if (queueItems.length == 0) return res.sendStatus(404);
 

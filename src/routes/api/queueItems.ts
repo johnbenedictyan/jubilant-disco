@@ -7,16 +7,16 @@ const router = Router();
 router.get("/", auth.optionalAuthenticate, queueItems.queueItemsList);
 
 router.get(
-  "/:queueId/:userUsername/joined",
+  "/:uuid/joined",
   auth.optionalAuthenticate,
   queueItems.queueItemsJoined
 );
 
 router.get("/:id", auth.optionalAuthenticate, queueItems.queueItemsGet);
 
-router.post("/", auth.authenticate, queueItems.queueItemsCreate);
+router.post("/", auth.optionalAuthenticate, queueItems.queueItemsCreate);
 
-router.put("/:id", auth.authenticate, queueItems.queueItemsUpdate);
+router.put("/:id", auth.optionalAuthenticate, queueItems.queueItemsUpdate);
 
 router.delete("/:id", auth.authenticate, queueItems.queueItemsDelete);
 
