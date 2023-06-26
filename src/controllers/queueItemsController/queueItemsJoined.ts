@@ -1,20 +1,8 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
-import { ParsedQs } from "qs";
-import queueItemsListPrisma from "../../utils/db/queueItem/queueItemListPrisma";
+import queueItemsJoinedListPrisma from "../../utils/db/queueItem/queueItemJoinedListPrisma";
 import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import queueItemViewer from "../../view/queueItemViewer";
-
-function parseQueueItemListQuery(query: ParsedQs) {
-  let { queueId, uuid } = query;
-  const queueIdNumber = queueId ? parseInt(queueId as string) : undefined;
-  uuid = uuid ? (uuid as string) : undefined;
-
-  return {
-    queueId: queueIdNumber,
-    uuid,
-  };
-}
 
 /**
  * queueItem controller that must receive a request.
@@ -28,15 +16,19 @@ export default async function queueItemsJoined(
   res: Response,
   next: NextFunction
 ) {
-  const { queueId, uuid } = parseQueueItemListQuery(req.query);
+  const { uuid } = req.params;
   const username = req.auth?.user?.username;
 
   try {
     // Get current user
     const currentUser = await userGetPrisma(username);
 
+    if (!uuid) {
+      return res.sendStatus(404);
+    }
+
     // Get the queueItems
-    const queueItems = await queueItemsListPrisma(queueId, uuid, true);
+    const queueItems = await queueItemsJoinedListPrisma(uuid);
 
     if (queueItems.length == 0) return res.sendStatus(404);
 
