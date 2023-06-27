@@ -15,7 +15,7 @@ router.put("/:id", auth.optionalAuthenticate, queueItems.queueItemsUpdate);
 router.delete("/:id", auth.authenticate, queueItems.queueItemsDelete);
 
 router.get(
-  "/:uuid/joined",
+  "/:queueId/:uuid/joined",
   auth.optionalAuthenticate,
   queueItems.queueItemsJoined
 );

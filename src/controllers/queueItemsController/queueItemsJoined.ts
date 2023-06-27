@@ -1,7 +1,6 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import queueItemsJoinedListPrisma from "../../utils/db/queueItem/queueItemJoinedListPrisma";
-import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import queueItemViewer from "../../view/queueItemViewer";
 
 /**
@@ -16,19 +15,21 @@ export default async function queueItemsJoined(
   res: Response,
   next: NextFunction
 ) {
-  const { uuid } = req.params;
-  const username = req.auth?.user?.username;
+  const { queueId, uuid } = req.params;
+  //   const username = req.auth?.user?.username;
 
   try {
     // Get current user
-    const currentUser = await userGetPrisma(username);
+    // const currentUser = await userGetPrisma(username);
 
-    if (!uuid) {
+    if (!(uuid && queueId)) {
       return res.sendStatus(404);
     }
 
+    const queueIdNumber = Number(queueId);
+
     // Get the queueItems
-    const queueItems = await queueItemsJoinedListPrisma(uuid);
+    const queueItems = await queueItemsJoinedListPrisma(queueIdNumber, uuid);
 
     if (queueItems.length == 0) return res.sendStatus(404);
 
