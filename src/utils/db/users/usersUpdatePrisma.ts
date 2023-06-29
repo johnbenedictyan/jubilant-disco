@@ -9,10 +9,10 @@ interface UpdateFields {
 }
 
 export default async function userUpdatePrisma(
-  username: string,
+  email: string,
   info: UpdateFields
 ) {
-  if (!username) return null;
-  const user = await prisma.user.update({ where: { username }, data: info });
+  if (!email) return null;
+  const user = await prisma.user.update({ where: { email }, data: info });
   return user;
 }
