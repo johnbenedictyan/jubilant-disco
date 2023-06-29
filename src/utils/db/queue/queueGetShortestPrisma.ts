@@ -14,7 +14,7 @@ export default async function queueGetShortestPrisma(shopId: number) {
           insert_date: "asc",
         },
       },
-      _count: { select: { queueItemList: true } },
+      _count: { select: { queueItemList: { where: { valid: true } } } },
     },
   });
   return queue;

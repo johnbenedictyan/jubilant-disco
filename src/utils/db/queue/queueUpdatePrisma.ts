@@ -15,7 +15,7 @@ export default async function queueUpdatePrisma(
     },
     include: {
       queueItemList: true,
-      _count: { select: { queueItemList: true } },
+      _count: { select: { queueItemList: { where: { valid: true } } } },
     },
   });
   return queue;
