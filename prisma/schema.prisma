@@ -22,6 +22,7 @@ model User {
     authored      Review[]       @relation("Author") /// List of reviews this user has written.
     likes         Review[]       @relation("Likes") /// List of reviews this user has liked.
     favoriteShops Shop[]         @relation("FavoriteShops") // List of shops this user hs favorited.
+    adminedShops  Shop[]         @relation("AdminedShops")
     role          String         @default("user")
     AnyQueueItem  AnyQueueItem[]
 }
@@ -46,20 +47,21 @@ model Tag {
 }
 
 model Shop {
-    id            Int            @id @default(autoincrement())
-    name          String // The string of the shop
-    addressField1 String
-    addressField2 String
-    addressField3 String
-    postalCode    String
-    image         String?
-    rating        Int            @default(0)
-    tagList       Tag[] // Tags associated with this shop
-    queueList     Queue[]
-    favoritedBy   User[]         @relation("FavoriteShops")
-    anyQueueList  AnyQueueItem[]
-    visible       Boolean        @default(true)
-    code          String         @unique
+    id              Int            @id @default(autoincrement())
+    name            String // The string of the shop
+    addressField1   String
+    addressField2   String
+    addressField3   String
+    postalCode      String
+    image           String?
+    rating          Int            @default(0)
+    tagList         Tag[] // Tags associated with this shop
+    queueList       Queue[]
+    favoritedBy     User[]         @relation("FavoriteShops")
+    anyQueueList    AnyQueueItem[]
+    visible         Boolean        @default(true)
+    code            String         @unique
+    administratedBy User[]         @relation("AdminedShops")
 }
 
 model Queue {
