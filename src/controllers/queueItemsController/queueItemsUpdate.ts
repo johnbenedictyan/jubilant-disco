@@ -21,12 +21,12 @@ export default async function queueItemsUpdate(
   const id = parseInt(req.params.id as string);
 
   const { valid, name, phoneNumber } = req.body.queueItem;
-  const userName = req.auth?.user?.username;
+  //   const userName = req.auth?.user?.username;
 
   try {
     // Get current user
-    const currentUser = await userGetPrisma(userName);
-    if (!currentUser) return res.sendStatus(401);
+    // const currentUser = await userGetPrisma(userName);
+    // if (!currentUser) return res.sendStatus(401);
 
     // Update the queueItem
     const queueItem = await queueItemUpdatePrisma(id, {
@@ -36,7 +36,7 @@ export default async function queueItemsUpdate(
     });
 
     // Create the queueItem view
-    const queueItemView = queueItemViewer(queueItem, currentUser);
+    const queueItemView = queueItemViewer(queueItem);
     return res.status(200).json({ queueItem: queueItemView });
   } catch (error) {
     return next(error);
