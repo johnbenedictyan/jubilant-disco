@@ -21,6 +21,7 @@ export default async function shopCreatePrisma(
       tagList: true,
       queueList: {
         include: {
+          queueItemList: true,
           _count: { select: { queueItemList: { where: { valid: true } } } },
         },
       },

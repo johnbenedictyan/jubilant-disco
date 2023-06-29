@@ -1,12 +1,9 @@
-import { Queue, Shop, Tag, User } from "@prisma/client";
-
-type ShopQueue = Queue & {
-  _count: { queueItemList: number };
-};
+import { Shop, Tag, User } from "@prisma/client";
+import { FullQueue } from "./queueViewer";
 
 type FullShop = Shop & {
   tagList: Tag[];
-  queueList: ShopQueue[];
+  queueList: FullQueue[];
   _count: { favoritedBy: number };
 };
 

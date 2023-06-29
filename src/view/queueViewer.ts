@@ -1,6 +1,6 @@
 import { Queue, QueueItem, User } from "@prisma/client";
 
-type FullQueue = Queue & {
+export type FullQueue = Queue & {
   queueItemList: QueueItem[];
   _count: { queueItemList: number };
 };

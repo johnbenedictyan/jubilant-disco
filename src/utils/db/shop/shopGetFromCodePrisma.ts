@@ -7,6 +7,7 @@ export default async function shopGetFromCodePrisma(code: string) {
     include: {
       queueList: {
         include: {
+          queueItemList: true,
           _count: { select: { queueItemList: { where: { valid: true } } } },
         },
       },
