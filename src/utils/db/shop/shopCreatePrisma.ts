@@ -20,8 +20,7 @@ export default async function shopCreatePrisma(
     include: {
       tagList: true,
       queueList: true,
-      anyQueueList: true,
-      _count: { select: { favoritedBy: true, anyQueueList: true } },
+      _count: { select: { favoritedBy: true } },
     },
   });
   return shop;

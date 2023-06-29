@@ -6,9 +6,8 @@ export default async function shopGetFromCodePrisma(code: string) {
     where: { code },
     include: {
       queueList: true,
-      anyQueueList: true,
       tagList: true,
-      _count: { select: { favoritedBy: true, anyQueueList: true } },
+      _count: { select: { favoritedBy: true } },
     },
   });
   return shop;

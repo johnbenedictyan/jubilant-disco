@@ -11,8 +11,7 @@ export default async function shopUnFavoritePrisma(
     data: { favoritedBy: { disconnect: { username: currentUser.username } } },
     include: {
       tagList: true,
-      anyQueueList: true,
-      _count: { select: { favoritedBy: true, anyQueueList: true } },
+      _count: { select: { favoritedBy: true } },
     },
   });
   return shop;

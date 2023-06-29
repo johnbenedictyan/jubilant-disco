@@ -5,8 +5,7 @@ export default async function shopDeletePrisma(id: number) {
     where: { id },
     include: {
       tagList: true,
-      anyQueueList: true,
-      _count: { select: { favoritedBy: true, anyQueueList: true } },
+      _count: { select: { favoritedBy: true } },
     },
   });
   return shop;
