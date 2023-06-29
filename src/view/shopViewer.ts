@@ -1,10 +1,13 @@
-import { AnyQueueItem, Queue, Shop, Tag, User } from "@prisma/client";
+import { Queue, Shop, Tag, User } from "@prisma/client";
+
+type ShopQueue = Queue & {
+  _count: { queueItemList: number };
+};
 
 type FullShop = Shop & {
   tagList: Tag[];
-  queueList: Queue[];
-  anyQueueList: AnyQueueItem[];
-  _count: { favoritedBy: number; anyQueueList: number };
+  queueList: ShopQueue[];
+  _count: { favoritedBy: number };
 };
 
 export default function shopViewer(
@@ -31,10 +34,8 @@ export default function shopViewer(
     rating: shop.rating,
     tagList: tagListView,
     queueList: queueListView,
-    anyQueueList: shop.anyQueueList,
     favorited: favorited,
     favoritesCount: shop._count.favoritedBy,
-    queueItemCount: shop._count.anyQueueList,
     visible: shop.visible,
     code: shop.code,
   };

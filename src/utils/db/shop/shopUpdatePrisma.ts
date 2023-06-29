@@ -15,7 +15,11 @@ export default async function shopUpdatePrisma(id: number, info: UpdateFields) {
       ...info,
     },
     include: {
-      queueList: true,
+      queueList: {
+        include: {
+          _count: { select: { queueItemList: { where: { valid: true } } } },
+        },
+      },
       tagList: true,
       _count: { select: { favoritedBy: true } },
     },

@@ -5,7 +5,11 @@ export default async function shopGetPrisma(id: number) {
   const shop = await prisma.shop.findUnique({
     where: { id },
     include: {
-      queueList: true,
+      queueList: {
+        include: {
+          _count: { select: { queueItemList: { where: { valid: true } } } },
+        },
+      },
       tagList: true,
       _count: { select: { favoritedBy: true } },
     },

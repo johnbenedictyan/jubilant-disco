@@ -25,7 +25,11 @@ export default async function shopsListPrisma(
     skip: offset,
     orderBy: { rating: "desc" },
     include: {
-      queueList: true,
+      queueList: {
+        include: {
+          _count: { select: { queueItemList: { where: { valid: true } } } },
+        },
+      },
       tagList: true,
       _count: { select: { favoritedBy: true } },
     },
