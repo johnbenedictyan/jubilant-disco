@@ -7,7 +7,6 @@ export default async function shopGetPrisma(id: number) {
     include: {
       queueList: {
         include: {
-          queueItemList: true,
           _count: { select: { queueItemList: { where: { valid: true } } } },
         },
       },

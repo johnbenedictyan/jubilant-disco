@@ -1,16 +1,14 @@
-import { Queue, QueueItem, User } from "@prisma/client";
+import { Queue, User } from "@prisma/client";
 
-type FullQueue = Queue & {
-  queueItemList: QueueItem[];
+export type QueueWithCount = Queue & {
   _count: { queueItemList: number };
 };
 
-export default function queueViewer(queue: FullQueue, currentUser?: User) {
+export default function queueWithCountViewer(queue: QueueWithCount, currentUser?: User) {
   const queueView = {
     id: queue.id,
     name: queue.name,
     shopId: queue.shopId,
-    queueItemList: queue.queueItemList,
     queueItemCount: queue._count.queueItemList,
     visible: queue.visible,
   };

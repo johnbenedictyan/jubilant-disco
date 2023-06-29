@@ -1,9 +1,9 @@
 import { Shop, Tag, User } from "@prisma/client";
-import { FullQueue } from "./queueViewer";
+import queueWithCountViewer, { QueueWithCount } from "./queueWithCountViewer";
 
 type FullShop = Shop & {
   tagList: Tag[];
-  queueList: FullQueue[];
+  queueList: QueueWithCount[];
   _count: { favoritedBy: number };
 };
 
@@ -17,9 +17,9 @@ export default function shopViewer(
 
   const tagListView = shop.tagList.map((tag) => tag.tagName).sort();
 
-  const queueListView = shop.queueList.sort((q1, q2) =>
-    q1.name.localeCompare(q2.name)
-  );
+  const queueListView = shop.queueList
+    .map((queue) => queueWithCountViewer(queue))
+    .sort((q1, q2) => q1.name.localeCompare(q2.name));
 
   const shopView = {
     id: shop.id,
