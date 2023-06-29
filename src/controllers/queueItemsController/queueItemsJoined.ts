@@ -37,7 +37,7 @@ export default async function queueItemsJoined(
     const queueItemView = queueItemViewer(queueItems[0]);
 
     return res.json({
-      queueItemJoined: queueItemView,
+      queueItem: queueItemView,
     });
   } catch (error) {
     return next(error);
