@@ -2,6 +2,7 @@ import { QueueItem, User } from "@prisma/client";
 
 export default function queueItemViewer(
   queueItem: QueueItem,
+  position?: number,
   currentUser?: User | null
 ) {
   const queueItemView = {
@@ -11,7 +12,8 @@ export default function queueItemViewer(
     phoneNumber: queueItem.phoneNumber,
     insertDate: queueItem.insert_date,
     valid: queueItem.valid,
-    uuid: queueItem.uuid
+    uuid: queueItem.uuid,
+    position,
   };
   return queueItemView;
 }

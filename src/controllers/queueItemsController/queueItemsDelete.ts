@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import queueItemDeletePrisma from "../../utils/db/queueItem/queueItemDeletePrisma";
+import queueItemGetPositionPrisma from "../../utils/db/queueItem/queueItemGetPositionPrisma";
 import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import queueItemViewer from "../../view/queueItemViewer";
 
@@ -38,8 +39,11 @@ export default async function queueItemsDelete(
       id,
     });
 
+    // Get Queue Item Position
+    const position = await queueItemGetPositionPrisma(queueItem);
+
     // Create the deleted queueItem view
-    const queueItemView = queueItemViewer(queueItem, currentUser);
+    const queueItemView = queueItemViewer(queueItem, position, currentUser);
     return res.status(200).json({ queueItem: queueItemView });
   } catch (error) {
     return next(error);

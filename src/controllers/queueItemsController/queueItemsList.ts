@@ -43,7 +43,7 @@ export default async function queueItemsList(
     // Create queueItems view
     const queueItemsListView = queueItems.map((queueItem) =>
       currentUser
-        ? queueItemViewer(queueItem, currentUser)
+        ? queueItemViewer(queueItem, undefined, currentUser)
         : queueItemViewer(queueItem)
     );
 

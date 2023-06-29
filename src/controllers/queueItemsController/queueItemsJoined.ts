@@ -1,5 +1,6 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
+import queueItemGetPositionPrisma from "../../utils/db/queueItem/queueItemGetPositionPrisma";
 import queueItemsJoinedListPrisma from "../../utils/db/queueItem/queueItemJoinedListPrisma";
 import queueItemViewer from "../../view/queueItemViewer";
 
@@ -33,8 +34,13 @@ export default async function queueItemsJoined(
 
     if (queueItems.length == 0) return res.sendStatus(404);
 
+    const queueItem = queueItems[0];
+
+    // Get Queue Item Position
+    const position = await queueItemGetPositionPrisma(queueItem);
+
     // Create the queueItem view
-    const queueItemView = queueItemViewer(queueItems[0]);
+    const queueItemView = queueItemViewer(queueItem, position);
 
     return res.json({
       queueItem: queueItemView,

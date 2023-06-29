@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
+import queueItemGetPositionPrisma from "../../utils/db/queueItem/queueItemGetPositionPrisma";
 import queueItemUpdatePrisma from "../../utils/db/queueItem/queueItemUpdatePrisma";
-import userGetPrisma from "../../utils/db/users/usersGetPrisma";
 import queueItemViewer from "../../view/queueItemViewer";
 
 /**
@@ -35,8 +35,11 @@ export default async function queueItemsUpdate(
       phoneNumber,
     });
 
+    // Get Item Position
+    const position = await queueItemGetPositionPrisma(queueItem);
+
     // Create the queueItem view
-    const queueItemView = queueItemViewer(queueItem);
+    const queueItemView = queueItemViewer(queueItem, position);
     return res.status(200).json({ queueItem: queueItemView });
   } catch (error) {
     return next(error);
