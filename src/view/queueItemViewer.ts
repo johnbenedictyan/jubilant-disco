@@ -12,6 +12,7 @@ export default function queueItemViewer(
     phoneNumber: queueItem.phoneNumber,
     insertDate: queueItem.insert_date,
     valid: queueItem.valid,
+    current: queueItem.current,
     uuid: queueItem.uuid,
     position,
   };

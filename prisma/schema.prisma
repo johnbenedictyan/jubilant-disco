@@ -82,6 +82,7 @@ model QueueItem {
     phoneNumber String?
     uuid        String?
     valid       Boolean  @default(true)
+    current     Boolean  @default(false)
 }
 
 model AnyQueueItem {

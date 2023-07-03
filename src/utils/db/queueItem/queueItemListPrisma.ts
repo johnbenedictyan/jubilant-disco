@@ -3,7 +3,7 @@ import prisma from "../prisma";
 export default async function queueItemsListPrisma(
   queueId?: number,
   uuid?: string,
-  valid?: boolean,
+  valid?: boolean
 ) {
   const queueItems = await prisma.queueItem.findMany({
     where: {
@@ -11,7 +11,7 @@ export default async function queueItemsListPrisma(
       uuid,
       valid,
     },
-    orderBy: { insert_date: "asc" },
+    orderBy: { current: "asc", insert_date: "asc" },
   });
   return queueItems;
 }
