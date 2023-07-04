@@ -12,6 +12,8 @@ router.get(
   queues.queuesList
 );
 
+router.get("/admin", auth.authenticate, queues.queuesAdminList);
+
 router.get(
   "/shop/:shopId/shortest",
   auth.optionalAuthenticate,

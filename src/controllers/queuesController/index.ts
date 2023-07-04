@@ -1,3 +1,4 @@
+export { default as queuesAdminList } from "./queuesAdminList";
 export { default as queuesCreate } from "./queuesCreate";
 export { default as queuesDelete } from "./queuesDelete";
 export { default as queuesGet } from "./queuesGet";
