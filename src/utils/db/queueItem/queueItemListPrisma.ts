@@ -11,7 +11,7 @@ export default async function queueItemsListPrisma(
       uuid,
       valid,
     },
-    orderBy: [{ current: "asc" }, { insert_date: "asc" }],
+    orderBy: [{ current: "desc" }, { insert_date: "asc" }],
   });
   return queueItems;
 }
