@@ -4,6 +4,7 @@ interface UpdateFields {
   valid: boolean;
   name: string;
   phoneNumber: string;
+  current: boolean;
 }
 
 export default async function queueItemUpdatePrisma(

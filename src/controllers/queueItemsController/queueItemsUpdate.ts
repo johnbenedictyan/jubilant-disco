@@ -20,7 +20,7 @@ export default async function queueItemsUpdate(
 ) {
   const id = parseInt(req.params.id as string);
 
-  const { valid, name, phoneNumber } = req.body.queueItem;
+  const { valid, name, phoneNumber, current } = req.body.queueItem;
   //   const userName = req.auth?.user?.username;
 
   try {
@@ -33,6 +33,7 @@ export default async function queueItemsUpdate(
       valid,
       name,
       phoneNumber,
+      current,
     });
 
     // Get Item Position
