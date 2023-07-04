@@ -3,6 +3,9 @@ import { Request } from "express-jwt";
 import queueItemGetPositionPrisma from "../../utils/db/queueItem/queueItemGetPositionPrisma";
 import queueItemUpdatePrisma from "../../utils/db/queueItem/queueItemUpdatePrisma";
 import queueItemViewer from "../../view/queueItemViewer";
+import sendNotification from "../../utils/notifier";
+import shopGetPrisma from "../../utils/db/shop/shopGetPrisma";
+import queueGetPrisma from "../../utils/db/queue/queueGetPrisma";
 
 /**
  * queueItem controller that must receive a request with an authenticated user.
@@ -38,6 +41,26 @@ export default async function queueItemsUpdate(
 
     // Get Item Position
     const position = await queueItemGetPositionPrisma(queueItem);
+
+    // Get the queue
+    const queue = await queueGetPrisma(queueItem.queueId);
+
+    if (queue) {
+      // Get the shop
+      const shop = await shopGetPrisma(queue.shopId);
+      if (shop) {
+        const ALERT_POSITION = 3;
+        if (position == ALERT_POSITION) {
+          sendNotification({
+            number: phoneNumber,
+            shopName: shop.name,
+            queueName: queue.name,
+            position: ALERT_POSITION,
+            personName: name,
+          });
+        }
+      }
+    }
 
     // Create the queueItem view
     const queueItemView = queueItemViewer(queueItem, position);
