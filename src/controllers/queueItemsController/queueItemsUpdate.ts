@@ -1,11 +1,11 @@
 import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
+import queueGetPrisma from "../../utils/db/queue/queueGetPrisma";
 import queueItemGetPositionPrisma from "../../utils/db/queueItem/queueItemGetPositionPrisma";
 import queueItemUpdatePrisma from "../../utils/db/queueItem/queueItemUpdatePrisma";
-import queueItemViewer from "../../view/queueItemViewer";
-import sendNotification from "../../utils/notifier";
 import shopGetPrisma from "../../utils/db/shop/shopGetPrisma";
-import queueGetPrisma from "../../utils/db/queue/queueGetPrisma";
+import sendNotification from "../../utils/notifier";
+import queueItemViewer from "../../view/queueItemViewer";
 
 /**
  * queueItem controller that must receive a request with an authenticated user.
@@ -50,8 +50,8 @@ export default async function queueItemsUpdate(
       const shop = await shopGetPrisma(queue.shopId);
       if (shop) {
         const ALERT_POSITION = 3;
-        if (position == ALERT_POSITION) {
-          sendNotification({
+        if (position < ALERT_POSITION) {
+          await sendNotification({
             number: phoneNumber,
             shopName: shop.name,
             queueName: queue.name,
