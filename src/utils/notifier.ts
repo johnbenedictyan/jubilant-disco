@@ -23,8 +23,8 @@ const sendNotification = ({
 }: NotificationProps) => {
   client.messages
     .create({
-      from: twilioNumber,
-      to: number,
+      from: `whatsapp:${twilioNumber}`,
+      to: `whatsapp:+65${number}`,
       body: `Hey ${personName}! You are in position ${position} in ${shopName}'s queue for ${queueName}, head back to the queue!`,
     })
     .then((message) => console.log(message.sid));
