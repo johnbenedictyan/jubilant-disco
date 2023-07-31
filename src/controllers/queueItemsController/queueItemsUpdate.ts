@@ -50,7 +50,7 @@ export default async function queueItemsUpdate(
       const shop = await shopGetPrisma(queue.shopId);
       if (shop) {
         const ALERT_POSITION = 3;
-        if (position < ALERT_POSITION) {
+        if (position > 0 && position < ALERT_POSITION) {
           sendNotification({
             number: phoneNumber,
             shopName: shop.name,
