@@ -51,7 +51,7 @@ export default async function queueItemsUpdate(
       if (shop) {
         const ALERT_POSITION = 3;
         if (position < ALERT_POSITION) {
-          await sendNotification({
+          sendNotification({
             number: phoneNumber,
             shopName: shop.name,
             queueName: queue.name,
